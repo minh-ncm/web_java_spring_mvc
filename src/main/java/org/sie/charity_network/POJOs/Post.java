@@ -32,7 +32,6 @@ public class Post implements Serializable{
     private int id;
     private String description;
     private String title;
-    private BigDecimal price;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
@@ -93,20 +92,6 @@ public class Post implements Serializable{
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * @return the price
-     */
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    /**
-     * @param price the price to set
-     */
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 
     /**
