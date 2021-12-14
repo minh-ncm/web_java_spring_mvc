@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//ApacheSoftware Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value="default title" />
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="contentLeft" value="/WEB-INF/layout/contentLeft.jsp" />
+        <put-attribute name="contentCenter" value="/WEB-INF/layout/contentCenter.jsp" />
+        <put-attribute name="contentRight" value="/WEB-INF/layout/contentRight.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+    </definition>
+    <definition name="homeIndex" extends="baseLayout">
+        <put-attribute name="title" value="Home page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/homeIndex.jsp" />
+    </definition>
+</tiles-definitions>
