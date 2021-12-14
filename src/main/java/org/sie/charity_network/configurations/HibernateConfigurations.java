@@ -28,7 +28,7 @@ public class HibernateConfigurations {
     @Bean
     public LocalSessionFactoryBean getLocalSessionFactoryBean(){
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setPackagesToScan(new String[] {"org.sie.POJOs"});
+        factoryBean.setPackagesToScan(new String[] {"org.sie.charity_network.POJOs"});
         factoryBean.setDataSource(getDataSource());
         factoryBean.setHibernateProperties(getHibernateProperties());
         return factoryBean;

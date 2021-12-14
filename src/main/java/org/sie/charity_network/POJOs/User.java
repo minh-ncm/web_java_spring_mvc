@@ -38,6 +38,7 @@ public class User implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
+    @Column(name = "is_reported")
     private Boolean isReport;
     @Transient
     private MultipartFile imageFile;
