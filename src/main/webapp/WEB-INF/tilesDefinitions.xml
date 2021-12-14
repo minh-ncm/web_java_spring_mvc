@@ -14,4 +14,8 @@
         <put-attribute name="title" value="Home page" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/homeIndex.jsp" />
     </definition>
+    <definition name="userRegistration" extends="baseLayout">
+        <put-attribute name="title" value="Account registration" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/userRegistration.jsp" />
+    </definition>
 </tiles-definitions>

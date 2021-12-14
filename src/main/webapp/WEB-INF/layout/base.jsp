@@ -14,7 +14,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         <title><tile:insertAttribute name="title"></tile:insertAttribute></title>
     </head>
-    <header><tile:insertAttribute name="header"/></header>
+    <header class="mb-5"><tile:insertAttribute name="header"/></header>
     <main>
         <div class="container-fluid">
             <div class="row">
@@ -24,5 +24,5 @@
             </div>
         </div>
     </main>
-    <footer><tile:insertAttribute name="footer"/></footer>
+    <footer class="mt-5"><tile:insertAttribute name="footer"/></footer>
 </html>

@@ -30,6 +30,9 @@
         <li class="nav-item">
             <a class="nav-link" href="<core:url value="admin/"/>">admin</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<core:url value="account/register/"/>">register</a>
+        </li>
       </ul>
     </div>
   </div>
