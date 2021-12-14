@@ -5,4 +5,4 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<<h1 class="border">default footer</h1>
+<h1 class="border">default footer</h1>
