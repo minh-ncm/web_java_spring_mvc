@@ -29,7 +29,7 @@ public class Comment implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String text;
-        private BigDecimal price;
+    private BigDecimal price;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;

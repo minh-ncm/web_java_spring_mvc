@@ -128,9 +128,8 @@ CREATE TABLE `post` (
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_post_user_user_id_idx` (`user_id`),
-  CONSTRAINT `fk_post_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `fk_post_user_winner_id` FOREIGN KEY (`id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_post_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +138,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'test description','test title','2021-12-15 12:07:30',NULL,'2021-12-15 12:07:30',1);
+INSERT INTO `post` VALUES (1,'test description','test title','2021-12-15 12:07:30',NULL,'2021-12-15 12:07:30',1),(4,'test end date','test end date','2021-12-15 14:53:26',NULL,'2021-12-15 14:53:25',1);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,4 +210,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 12:08:14
+-- Dump completed on 2021-12-15 21:53:07

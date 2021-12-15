@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.services;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.Post;
 
 /**
@@ -12,4 +13,6 @@ import org.sie.charity_network.POJOs.Post;
  */
 public interface PostService {
     void addPost(Post post);
+    List<Post> getPost(int page, int maxResult);
+    Long getPostAmount();
 }
