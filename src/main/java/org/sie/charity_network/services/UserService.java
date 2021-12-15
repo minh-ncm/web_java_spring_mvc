@@ -12,4 +12,5 @@ import org.sie.charity_network.POJOs.User;
  */
 public interface UserService {
     void addUser(User user);
+    User getUser(int id);
 }

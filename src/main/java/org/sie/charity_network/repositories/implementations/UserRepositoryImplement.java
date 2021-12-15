@@ -4,6 +4,10 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.repositories.UserRepository;
@@ -27,5 +31,16 @@ public class UserRepositoryImplement implements UserRepository{
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         session.save(user);
     }
-    
+
+    @Override
+    public User getUser(int id) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery  = builder.createQuery(User.class);
+        Root<User> userRoot = criteriaQuery.from(User.class);
+        criteriaQuery.where(builder.equal(userRoot.get("id").as(Integer.class), id));
+        Query query = session.createQuery(criteriaQuery);
+        return (User) query.getSingleResult();
+    }
+
 }

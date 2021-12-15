@@ -28,6 +28,9 @@
             <a class="nav-link" href="#">Account</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="<core:url value="/post/create/"/>">create post</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="<core:url value="/admin/"/>">admin</a>
         </li>
         <li class="nav-item">
