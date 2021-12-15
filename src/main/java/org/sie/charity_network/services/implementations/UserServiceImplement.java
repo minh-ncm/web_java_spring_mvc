@@ -49,5 +49,10 @@ public class UserServiceImplement implements UserService{
         }
         userRepository.addUser(user);
     }
-    
+
+    @Override
+    public User getUser(int id) {
+        return userRepository.getUser(id);
+    }
+
 }

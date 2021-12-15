@@ -19,6 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -30,13 +33,17 @@ public class Post implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Size(min = 10, max = 300, message = "{post.description.size}")
     private String description;
+    @Size(min = 5, max = 50, message = "{post.title.size}")
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_date")
+//    @NotNull(message = "{post.endDate.null}")
     private Date endDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
