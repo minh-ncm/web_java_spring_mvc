@@ -7,8 +7,8 @@ package org.sie.charity_network.controllers;
 import java.util.Date;
 import javax.validation.Valid;
 import org.sie.charity_network.POJOs.Post;
-import org.sie.charity_network.services.PostService;import org.sie.charity_network.services.UserService;
-;
+import org.sie.charity_network.services.PostService;
+import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +42,6 @@ public class PostController {
         post.setEndDate(new Date());
         post.setOwner(userService.getUser(1));
         postService.addPost(post);
-        return "homeIndex";
+        return "dashboard";
     }
 }

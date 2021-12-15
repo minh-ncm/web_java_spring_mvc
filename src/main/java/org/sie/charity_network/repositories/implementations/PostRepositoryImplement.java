@@ -4,6 +4,11 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Post;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +31,29 @@ public class PostRepositoryImplement implements PostRepository{
     public void addPost(Post post) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         session.save(post);
+    }
+
+    @Override
+    public List<Post> getPost(int page,  int maxResult) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Post> criteriaQuery = builder.createQuery(Post.class);
+        Root<Post> postRoot = criteriaQuery.from(Post.class);
+        Query query = session.createQuery(criteriaQuery);
+        query.setMaxResults(maxResult);
+        query.setFirstResult((page-1)*maxResult);
+        return query.getResultList();
+    }
+
+    @Override
+    public Long getPostAmount() {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
+        Root<Post> postRoot = criteriaQuery.from(Post.class);
+        criteriaQuery.select(builder.count(postRoot));
+        Query query = session.createQuery(criteriaQuery);
+        return (Long) query.getSingleResult();
     }
 
     
