@@ -23,13 +23,11 @@
         <form:textarea path="description" type="text-area" cssClass="form-control" id="description" rows="5"/>
         <form:errors path="description" element="p" cssClass="text text-danger"/>
     </div>
-        <%--
     <div class="row mb-3">
         <label for="endDate" class="form-label">end date</label>
         <form:input path="endDate" type="datetime-local" cssClass="form-control" id="endDate"/>
         <form:errors path="endDate" element="p" cssClass="text text-danger"/>
     </div>
-        --%>
     <button class="btn btn-success" type="submit">Create</button>
 </form:form>
 
