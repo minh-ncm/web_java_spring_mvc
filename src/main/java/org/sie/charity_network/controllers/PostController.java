@@ -10,6 +10,7 @@ import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.services.PostService;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class PostController {
+    @Autowired
+    private Environment environment;
     @Autowired
     private PostService postService;
     @Autowired
@@ -42,6 +45,6 @@ public class PostController {
         post.setEndDate(new Date());
         post.setOwner(userService.getUser(1));
         postService.addPost(post);
-        return "dashboard";
+        return "redirect:"+environment.getProperty("url.dashboard");
     }
 }

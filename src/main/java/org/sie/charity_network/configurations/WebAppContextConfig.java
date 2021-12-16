@@ -10,6 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
@@ -29,6 +30,7 @@ import org.springframework.web.servlet.view.JstlView;
 @ComponentScan("org.sie.charity_network")
 @EnableWebMvc
 @EnableTransactionManagement
+@PropertySource("classpath:properties/urls.properties")
 public class WebAppContextConfig implements WebMvcConfigurer{
 
     @Override
@@ -44,15 +46,16 @@ public class WebAppContextConfig implements WebMvcConfigurer{
     @Bean
     public LocalValidatorFactoryBean getLocalValidatorFactoryBean() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(getMessageSource());
+        validator.setValidationMessageSource(messageSource());
         return validator;
     }
     
     @Bean
-    public MessageSource getMessageSource() {
+    public MessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasenames(
-                "messages/errors"
+                "messages/errors",
+                "properties/urls"
         );
         return source;
     }

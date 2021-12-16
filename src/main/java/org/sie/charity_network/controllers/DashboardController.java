@@ -29,6 +29,7 @@ public class DashboardController {
         
         model.addAttribute("postList", postService.getPost(currentPage, maxResult));
         model.addAttribute("maxPage", maxPage);
+        model.addAttribute("currentPage", currentPage);
         return "dashboard";
     }
 }

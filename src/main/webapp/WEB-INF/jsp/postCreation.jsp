@@ -11,7 +11,6 @@
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h1>Post creation page</h1>
-<form:errors path="*" element="p" cssClass="alert alert-danger"/>
 <form:form modelAttribute="post" action="" method="post">
     <div class="row mb-3">
         <label for="title" class="form-label">title</label>

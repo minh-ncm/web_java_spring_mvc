@@ -6,10 +6,16 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="url.dashboard" var="dashboardUrl"/>
+<spring:message code="url.admin" var="adminUrl" />
+<spring:message code="url.user.register" var="userRegisterUrl"/>
+<spring:message code="url.post.create" var="postCreateUrl" />
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container-fluid">
-      <a class="navbar-brand" href="<core:url value="/"/>" aria-current="page">Home</a>
+      <a class="navbar-brand" href="<core:url value="${dashboardUrl}"/>" aria-current="page">Home</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,13 +34,13 @@
             <a class="nav-link" href="#">Account</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<core:url value="/post/create/"/>">create post</a>
+            <a class="nav-link" href="<core:url value="${postCreateUrl}"/>">create post</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<core:url value="/admin/"/>">admin</a>
+            <a class="nav-link" href="<core:url value="${adminUrl}"/>">admin</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<core:url value="/account/register/"/>">register</a>
+            <a class="nav-link" href="<core:url value="${userRegisterUrl}"/>">register</a>
         </li>
       </ul>
     </div>

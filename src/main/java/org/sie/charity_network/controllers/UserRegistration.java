@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,18 +24,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserRegistration {
     @Autowired
     private UserService userService;
+    @Autowired
+    private Environment environment;
     
-    @GetMapping("/account/register/")
+    @GetMapping("/user/register/")
     public String render(Model model){
         model.addAttribute("user", new User());
         return "userRegistration";
     }
     
-    @PostMapping("/account/register/")
+    @PostMapping("/user/register/")
     public String submit(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return "userRegistration";
         userService.addUser(user);
-        return "redirect:/";
+        return "redirect:"+environment.getProperty("url.dashboard");
     }
 }

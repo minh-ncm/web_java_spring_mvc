@@ -11,6 +11,7 @@ import org.sie.charity_network.services.LikeService;
 import org.sie.charity_network.services.PostService;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class LikeController {
     @Autowired
+    private Environment environment;
+    @Autowired
     private LikeService likeService;
     @Autowired
     private UserService userService;
@@ -40,6 +43,6 @@ public class LikeController {
         Post post = postService.getPost(postId);
         model.addAttribute("postId", postId);
         likeService.addLike(post, user);
-        return "redirect:/";
+        return "redirect:"+environment.getProperty("url.dashboard");
     }
 }
