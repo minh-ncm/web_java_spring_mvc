@@ -17,33 +17,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author sie
  */
 @Entity
-@Table(name = "comments")
-public class Comment implements Serializable{
+@Table(name = "bids")
+public class Bid implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @NotNull(message = "{comment.text.notnull}")
-//    @Max(value = 300, message = "{comment.text.max}")
-    private String text;
+    private BigDecimal amount;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Comment() {
+    public Bid() {
     }
 
     /**
@@ -61,31 +57,31 @@ public class Comment implements Serializable{
     }
 
     /**
-     * @return the text
+     * @return the amount
      */
-    public String getText() {
-        return text;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     /**
-     * @param text the text to set
+     * @param amount the amount to set
      */
-    public void setText(String text) {
-        this.text = text;
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 
     /**
-     * @return the createdDate
+     * @return the post
      */
-    public Date getCreatedDate() {
-        return createdDate;
+    public Post getPost() {
+        return post;
     }
 
     /**
-     * @param createdDate the createdDate to set
+     * @param post the post to set
      */
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     /**
@@ -103,17 +99,18 @@ public class Comment implements Serializable{
     }
 
     /**
-     * @return the post
+     * @return the createdDate
      */
-    public Post getPost() {
-        return post;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
     /**
-     * @param post the post to set
+     * @param createdDate the createdDate to set
      */
-    public void setPost(Post post) {
-        this.post = post;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
-     
+    
+    
 }

@@ -30,5 +30,12 @@ public class LikeServiceImplement implements LikeService{
         like.setPost(post);
         likeRepository.addLike(like);
     }
+
+    @Override
+    public void addLike(Like like) {
+        like.setCreatedDate(new Date());
+        likeRepository.addLike(like);
+    }
+    
     
 }

@@ -42,7 +42,7 @@ public class Post implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_date")
-    @NotNull(message = "{post.endDate.null}")
+    @NotNull(message = "{post.endDate.notnull}")
     private Date endDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -54,6 +54,8 @@ public class Post implements Serializable{
     private List<Like> likeList;
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
+    @OneToMany(mappedBy = "post")
+    private List<Bid> bidList;
 
     public Post() {
     }
@@ -182,6 +184,20 @@ public class Post implements Serializable{
      */
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    /**
+     * @return the bidList
+     */
+    public List<Bid> getBidList() {
+        return bidList;
+    }
+
+    /**
+     * @param bidList the bidList to set
+     */
+    public void setBidList(List<Bid> bidList) {
+        this.bidList = bidList;
     }
     
     

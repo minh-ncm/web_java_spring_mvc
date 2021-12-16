@@ -46,6 +46,8 @@ public class User implements Serializable{
     @Transient
     private MultipartFile imageFile;
     @OneToMany(mappedBy = "reported")
+    private List<Report> reportByList;
+    @OneToMany(mappedBy = "reporter")
     private List<Report> reportList;
     @OneToMany(mappedBy = "owner")
     private List<Post> ownPostList;
@@ -55,6 +57,8 @@ public class User implements Serializable{
     private List<Like> likeList;
     @OneToMany(mappedBy = "user")
     private List<Comment> commentList;
+    @OneToMany(mappedBy = "user")
+    private List<Bid> bidList;
 
     public User() {
     }
@@ -239,6 +243,34 @@ public class User implements Serializable{
      */
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    /**
+     * @return the bidList
+     */
+    public List<Bid> getBidList() {
+        return bidList;
+    }
+
+    /**
+     * @param bidList the bidList to set
+     */
+    public void setBidList(List<Bid> bidList) {
+        this.bidList = bidList;
+    }
+
+    /**
+     * @return the reportByList
+     */
+    public List<Report> getReportByList() {
+        return reportByList;
+    }
+
+    /**
+     * @param reportByList the reportByList to set
+     */
+    public void setReportByList(List<Report> reportByList) {
+        this.reportByList = reportByList;
     }
     
     

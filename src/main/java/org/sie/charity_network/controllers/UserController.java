@@ -4,10 +4,8 @@
  */
 package org.sie.charity_network.controllers;
 
-import java.util.Date;
 import javax.validation.Valid;
-import org.sie.charity_network.POJOs.Post;
-import org.sie.charity_network.services.PostService;
+import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -23,28 +21,23 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author sie
  */
 @Controller
-public class PostController {
-    @Autowired
-    private Environment environment;
-    @Autowired
-    private PostService postService;
+public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private Environment environment;
     
-    @GetMapping("/post/create/")
-    public String render(Model model) {
-        model.addAttribute("post", new Post());
-        return "postCreation";
+    @GetMapping("/user/create/")
+    public String render(Model model){
+        model.addAttribute("user", new User());
+        return "userRegistration";
     }
     
-    @PostMapping("/post/create/")
-    public String submit(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult){
-        
+    @PostMapping("/user/create/")
+    public String create(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult){
         if(bindingResult.hasErrors())
-            return "postCreation";
-        post.setEndDate(new Date());
-        post.setOwner(userService.getUser(1));
-        postService.addPost(post);
+            return "userRegistration";
+        userService.addUser(user);
         return "redirect:"+environment.getProperty("url.dashboard");
     }
 }
