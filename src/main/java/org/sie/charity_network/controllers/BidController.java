@@ -4,14 +4,12 @@
  */
 package org.sie.charity_network.controllers;
 
-import javax.validation.Valid;
-import org.sie.charity_network.POJOs.Comment;
-import org.sie.charity_network.services.CommentService;
+import org.sie.charity_network.POJOs.Bid;
+import org.sie.charity_network.services.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,17 +18,16 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author sie
  */
 @Controller
-public class CommentController {
+public class BidController {
     @Autowired
     private Environment environment;
     @Autowired
-    private CommentService commentService;
-    
-    @PostMapping("/comment/create/")
-    String create(@ModelAttribute("comment")@Valid Comment comment, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "dashboard";
-        commentService.addComment(comment);
+    private BidService bidService;
+    @PostMapping("/bid/create/")
+    String create(@ModelAttribute("bid") Bid bid, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return "";
+        bidService.addBid(bid);
         return "redirect:"+environment.getProperty("url.dashboard");
     }
 }

@@ -17,6 +17,7 @@
 <spring:message code="url.bid.create" var="bidCreate"/>
 <core:url value="${bidCreate}" var="bidCreateUrl"/>
 
+<form:errors path="*" cssClass="text text-danger" element="p"/>
 <h1>Index content</h1>
 <core:forEach items="${postList}" var="post">
     <div class="card" style="width: 18rem;">
@@ -44,7 +45,7 @@
       </div>
               
     <div class="collapse" id="commentForm${post.id}">
-        <form:form method="post" modelAttribute="comment" action="" >
+        <form:form method="post" modelAttribute="comment" action="${commentCreateUrl}" >
             <form:select path="user" id="user" cssStyle="display:none;">
                 <option value="${user.id}"></option>
             </form:select>
@@ -52,7 +53,7 @@
                 <option value="${post.id}">${post.id}</option>
             </form:select>
             <form:textarea path="text" type="text" rows="3"/>
-            <form:errors path="text" cssClass="text text-danger"/>
+            <form:errors path="text" cssClass="text text-danger" element="p"/>
               <button class="btn btn-primary" type="submit">Create</button>
         </form:form>
       </div>
@@ -65,7 +66,7 @@
             <form:select path="post" id="post" cssStyle="display:none;">
                 <option value="${post.id}">${post.id}</option>
             </form:select>
-            <form:input path="amount" type="number"/>
+            <form:input path="amount" type="number" step="0.01"/>
             <button class="btn btn-primary" type="submit">Bid</button>
         </form:form>
     </div>    
