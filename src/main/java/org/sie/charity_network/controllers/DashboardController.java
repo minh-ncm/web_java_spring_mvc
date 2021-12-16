@@ -5,9 +5,14 @@
 package org.sie.charity_network.controllers;
 
 import java.util.Map;
+import org.sie.charity_network.POJOs.Bid;
+import org.sie.charity_network.POJOs.Comment;
+import org.sie.charity_network.POJOs.Like;
+import org.sie.charity_network.POJOs.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.sie.charity_network.services.PostService;
+import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class DashboardController {
     @Autowired
     private PostService postService;
+    @Autowired
+    private UserService userService;
     
     @GetMapping("/")
     public String render(@RequestParam(required = false) Map<String, String> params, Model model) {
@@ -28,8 +35,12 @@ public class DashboardController {
         double maxPage = Math.ceil(postService.getPostAmount().intValue() / (double)maxResult);
         
         model.addAttribute("postList", postService.getPost(currentPage, maxResult));
+        model.addAttribute("user", userService.getUser(1)); // remove when have authentication
         model.addAttribute("maxPage", maxPage);
         model.addAttribute("currentPage", currentPage);
+        model.addAttribute("like", new Like());
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("bid", new Bid());
         return "dashboard";
     }
 }

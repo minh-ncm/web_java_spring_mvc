@@ -4,15 +4,12 @@
  */
 package org.sie.charity_network.services;
 
-import org.sie.charity_network.POJOs.Like;
-import org.sie.charity_network.POJOs.Post;
-import org.sie.charity_network.POJOs.User;
+import org.sie.charity_network.POJOs.Comment;
 
 /**
  *
  * @author sie
  */
-public interface LikeService {
-    void addLike(Post post, User user);
-    void addLike(Like like);
+public interface CommentService {
+    void addComment(Comment comment);
 }

@@ -42,7 +42,7 @@ public class Post implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_date")
-    @NotNull(message = "{post.endDate.null}")
+    @NotNull(message = "{post.endDate.notnull}")
     private Date endDate;
     @ManyToOne
     @JoinColumn(name = "user_id")

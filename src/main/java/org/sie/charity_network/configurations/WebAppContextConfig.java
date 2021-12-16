@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.sie.charity_network.formatter.*;
 
 /**
  *
@@ -42,7 +44,13 @@ public class WebAppContextConfig implements WebMvcConfigurer{
     public Validator getValidator() {
         return getLocalValidatorFactoryBean();
     }
-    
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new UserFormatter());
+        registry.addFormatter(new PostFormatter());
+    }
+
     @Bean
     public LocalValidatorFactoryBean getLocalValidatorFactoryBean() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();

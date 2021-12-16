@@ -10,9 +10,12 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<spring:message code="url.like.create" var="likeCreateUrl"/>
-<spring:message code="url.comment.create" var="commentCreateUrl"/>
-<spring:message code="url.bid.create" var="bidCreateUrl"/>
+<spring:message code="url.like.create" var="likeCreate"/>
+<core:url value="${likeCreate}" var="likeCreateUrl"/>
+<spring:message code="url.comment.create" var="commentCreate"/>
+<core:url value="${commentCreate}" var="commentCreateUrl"/>
+<spring:message code="url.bid.create" var="bidCreate"/>
+<core:url value="${bidCreate}" var="bidCreateUrl"/>
 
 <h1>Index content</h1>
 <core:forEach items="${postList}" var="post">
@@ -23,12 +26,49 @@
         <div class="card-body">
           <p class="card-text">${post.description}</p>
           <div class="container btn-group">
-              <a class="btn btn-primary" role="button" href="<core:url value="${likeCreateUrl}"/>?postId=${post.id}&userId=${user.id}">Like</a>
-              <a class="btn btn-primary" role="button"href="<core:url value="${postCreateUrl}"/>">Comment</a>
-              <a class="btn btn-primary" role="button" href="<core:url value="${bidCreateUrl}"/>">Bid</a>
+              <form:form method="post" modelAttribute="like" action="${likeCreateUrl}" cssClass="likeHiddenForm">
+                  <form:select path="user" id="user" cssStyle="display:none;">
+                      <option value="${user.id}"></option>
+                  </form:select>
+                  <form:select path="post" id="post" cssStyle="display:none;">
+                      <option value="${post.id}">${post.id}</option>
+                  </form:select>
+                      <button class="btn btn-primary" type="submit">Like</button>
+              </form:form>
+                  
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm${post.id}" aria-expanded="false" aria-controls="commentForm${post.id}">Comment</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bidForm${post.id}" aria-expanded="false" aria-controls="bidForm${post.id}">Bid</button>
+                  
           </div>
         </div>
       </div>
+              
+    <div class="collapse" id="commentForm${post.id}">
+        <form:form method="post" modelAttribute="comment" action="" >
+            <form:select path="user" id="user" cssStyle="display:none;">
+                <option value="${user.id}"></option>
+            </form:select>
+            <form:select path="post" id="post" cssStyle="display:none;">
+                <option value="${post.id}">${post.id}</option>
+            </form:select>
+            <form:textarea path="text" type="text" rows="3"/>
+            <form:errors path="text" cssClass="text text-danger"/>
+              <button class="btn btn-primary" type="submit">Create</button>
+        </form:form>
+      </div>
+          
+    <div class="collapse" id="bidForm${post.id}">
+        <form:form method="post" modelAttribute="bid" action="${bidCreateUrl}">
+            <form:select path="user" id="user" cssStyle="display:none;">
+                <option value="${user.id}"></option>
+            </form:select>
+            <form:select path="post" id="post" cssStyle="display:none;">
+                <option value="${post.id}">${post.id}</option>
+            </form:select>
+            <form:input path="amount" type="number"/>
+            <button class="btn btn-primary" type="submit">Bid</button>
+        </form:form>
+    </div>    
 </core:forEach>
 
     

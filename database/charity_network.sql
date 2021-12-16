@@ -63,7 +63,7 @@ CREATE TABLE `comments` (
   KEY `fk_comment_post_post_id_idx` (`post_id`),
   CONSTRAINT `fk_comment_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_comment_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +72,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (1,'asdfasdf',1,1,'2021-12-16 20:49:15'),(2,'asdfasdf',1,4,'2021-12-16 20:51:24'),(3,'fgsdfgsdfg',1,8,'2021-12-16 20:53:16'),(4,'ghhdgfhdh',1,7,'2021-12-16 20:54:02');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +93,7 @@ CREATE TABLE `likes` (
   KEY `fk_like_user_user_id_idx` (`user_id`),
   CONSTRAINT `fk_like_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_like_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +102,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (1,1,1,'2021-12-16 08:24:33'),(2,1,1,'2021-12-16 08:24:53'),(3,1,1,'2021-12-16 08:42:54'),(4,1,5,'2021-12-16 08:54:07'),(5,1,4,'2021-12-16 08:54:16'),(6,1,5,'2021-12-16 13:37:15'),(7,1,4,'2021-12-16 13:38:40'),(8,1,4,'2021-12-16 13:39:13'),(9,1,1,'2021-12-16 14:19:37');
+INSERT INTO `likes` VALUES (1,1,1,'2021-12-16 08:24:33'),(2,1,1,'2021-12-16 08:24:53'),(3,1,1,'2021-12-16 08:42:54'),(4,1,5,'2021-12-16 08:54:07'),(5,1,4,'2021-12-16 08:54:16'),(6,1,5,'2021-12-16 13:37:15'),(7,1,4,'2021-12-16 13:38:40'),(8,1,4,'2021-12-16 13:39:13'),(9,1,1,'2021-12-16 14:19:37'),(10,1,1,'2021-12-16 18:26:19'),(11,1,4,'2021-12-16 18:45:52'),(12,1,4,'2021-12-16 18:45:55'),(13,1,4,'2021-12-16 18:45:56'),(14,1,7,'2021-12-16 20:01:47');
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,4 +241,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-16 15:16:25
+-- Dump completed on 2021-12-16 20:58:03

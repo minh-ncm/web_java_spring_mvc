@@ -4,12 +4,8 @@
  */
 package org.sie.charity_network.controllers;
 
-import java.util.Map;
-import org.sie.charity_network.POJOs.Like;
-import org.sie.charity_network.POJOs.Post;
+import javax.validation.Valid;
 import org.sie.charity_network.POJOs.User;
-import org.sie.charity_network.services.LikeService;
-import org.sie.charity_network.services.PostService;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -19,26 +15,29 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author sie
  */
 @Controller
-public class LikeController {
-    @Autowired
-    private Environment environment;
-    @Autowired
-    private LikeService likeService;
+public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
-    private PostService postService;
+    private Environment environment;
     
-    @PostMapping("like/create/")
-    String create(@ModelAttribute("like") Like like, Model model) {
-        likeService.addLike(like);
+    @GetMapping("/user/create/")
+    public String render(Model model){
+        model.addAttribute("user", new User());
+        return "userRegistration";
+    }
+    
+    @PostMapping("/user/create/")
+    public String create(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult){
+        if(bindingResult.hasErrors())
+            return "userRegistration";
+        userService.addUser(user);
         return "redirect:"+environment.getProperty("url.dashboard");
     }
 }
