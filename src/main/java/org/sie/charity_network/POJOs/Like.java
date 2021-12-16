@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  * @author sie
  */
 @Entity
-@Table(name = "like")
+@Table(name = "likes")
 public class Like implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

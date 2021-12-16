@@ -44,6 +44,19 @@ public class PostRepositoryImplement implements PostRepository{
         query.setFirstResult((page-1)*maxResult);
         return query.getResultList();
     }
+    
+     @Override
+    public Post getPost(int id) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Post> criteriaQuery = builder.createQuery(Post.class);
+        Root<Post> postRoot = criteriaQuery.from(Post.class);
+        
+        criteriaQuery.where(builder.equal(postRoot.get("id").as(Integer.class), id));
+        
+        Query query = session.createQuery(criteriaQuery);
+        return (Post) query.getSingleResult();
+    }
 
     @Override
     public Long getPostAmount() {
@@ -56,5 +69,5 @@ public class PostRepositoryImplement implements PostRepository{
         return (Long) query.getSingleResult();
     }
 
-    
+   
 }

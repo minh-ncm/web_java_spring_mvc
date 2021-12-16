@@ -35,6 +35,6 @@ public class UserRegistration {
         if(bindingResult.hasErrors())
             return "userRegistration";
         userService.addUser(user);
-        return "dashboard";
+        return "redirect:/";
     }
 }

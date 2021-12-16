@@ -6,7 +6,7 @@ package org.sie.charity_network.POJOs;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,9 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author sie
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,15 +46,15 @@ public class User implements Serializable{
     @Transient
     private MultipartFile imageFile;
     @OneToMany(mappedBy = "reported")
-    private Set<Report> reportSet;
+    private List<Report> reportList;
     @OneToMany(mappedBy = "owner")
-    private Set<Post> ownPostSet;
+    private List<Post> ownPostList;
     @OneToMany(mappedBy = "winner")
-    private Set<Post> wonPostSet;
+    private List<Post> wonPostList;
     @OneToMany(mappedBy = "user")
-    private Set<Like> likeSet;
+    private List<Like> likeList;
     @OneToMany(mappedBy = "user")
-    private Set<Comment> commentSet;
+    private List<Comment> commentList;
 
     public User() {
     }
@@ -177,71 +174,71 @@ public class User implements Serializable{
     /**
      * @return the reportSet
      */
-    public Set<Report> getReportSet() {
-        return reportSet;
+    public List<Report> getReportList() {
+        return reportList;
     }
 
     /**
-     * @param reportSet the reportSet to set
+     * @param reportList the reportSet to set
      */
-    public void setReportSet(Set<Report> reportSet) {
-        this.reportSet = reportSet;
+    public void setReportList(List<Report> reportList) {
+        this.reportList = reportList;
     }
 
     /**
      * @return the postSet
      */
-    public Set<Post> getOwnPostSet() {
-        return ownPostSet;
+    public List<Post> getOwnPostList() {
+        return ownPostList;
     }
 
     /**
-     * @param ownPostSet the postSet to set
+     * @param ownPostList the postSet to set
      */
-    public void setOwnPostSet(Set<Post> ownPostSet) {
-        this.ownPostSet = ownPostSet;
+    public void setOwnPostList(List<Post> ownPostList) {
+        this.ownPostList = ownPostList;
     }
 
     /**
      * @return the wonPostSet
      */
-    public Set<Post> getWonPostSet() {
-        return wonPostSet;
+    public List<Post> getWonPostList() {
+        return wonPostList;
     }
 
     /**
-     * @param wonPostSet the wonPostSet to set
+     * @param wonPostList the wonPostSet to set
      */
-    public void setWonPostSet(Set<Post> wonPostSet) {
-        this.wonPostSet = wonPostSet;
+    public void setWonPostList(List<Post> wonPostList) {
+        this.wonPostList = wonPostList;
     }
 
     /**
      * @return the likeSet
      */
-    public Set<Like> getLikeSet() {
-        return likeSet;
+    public List<Like> getLikeList() {
+        return likeList;
     }
 
     /**
-     * @param likeSet the likeSet to set
+     * @param likeList the likeSet to set
      */
-    public void setLikeSet(Set<Like> likeSet) {
-        this.likeSet = likeSet;
+    public void setLikeList(List<Like> likeList) {
+        this.likeList = likeList;
     }
 
     /**
      * @return the commentSet
      */
-    public Set<Comment> getCommentSet() {
-        return commentSet;
+    public List<Comment> getCommentList() {
+        return commentList;
     }
 
     /**
-     * @param commentSet the commentSet to set
+     * @param commentList the commentSet to set
      */
-    public void setCommentSet(Set<Comment> commentSet) {
-        this.commentSet = commentSet;
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
     
     
