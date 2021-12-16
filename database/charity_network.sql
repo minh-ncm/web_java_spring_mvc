@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `comment`
+-- Table structure for table `comments`
 --
 
-DROP TABLE IF EXISTS `comment`;
+DROP TABLE IF EXISTS `comments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comment` (
+CREATE TABLE `comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `text` varchar(200) NOT NULL,
   `user_id` int NOT NULL,
@@ -32,28 +32,28 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`),
   KEY `fk_comment_user_user_id_idx` (`user_id`),
   KEY `fk_comment_post_post_id_idx` (`post_id`),
-  CONSTRAINT `fk_comment_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
-  CONSTRAINT `fk_comment_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `fk_comment_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  CONSTRAINT `fk_comment_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `comment`
+-- Dumping data for table `comments`
 --
 
-LOCK TABLES `comment` WRITE;
-/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+LOCK TABLES `comments` WRITE;
+/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `like`
+-- Table structure for table `likes`
 --
 
-DROP TABLE IF EXISTS `like`;
+DROP TABLE IF EXISTS `likes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `like` (
+CREATE TABLE `likes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `post_id` int NOT NULL,
@@ -61,28 +61,29 @@ CREATE TABLE `like` (
   PRIMARY KEY (`id`),
   KEY `fk_like_post_post_id_idx` (`post_id`),
   KEY `fk_like_user_user_id_idx` (`user_id`),
-  CONSTRAINT `fk_like_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
-  CONSTRAINT `fk_like_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_like_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  CONSTRAINT `fk_like_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `like`
+-- Dumping data for table `likes`
 --
 
-LOCK TABLES `like` WRITE;
-/*!40000 ALTER TABLE `like` DISABLE KEYS */;
-/*!40000 ALTER TABLE `like` ENABLE KEYS */;
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (1,1,1,'2021-12-16 08:24:33'),(2,1,1,'2021-12-16 08:24:53'),(3,1,1,'2021-12-16 08:42:54'),(4,1,5,'2021-12-16 08:54:07'),(5,1,4,'2021-12-16 08:54:16');
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `notification`
+-- Table structure for table `notifications`
 --
 
-DROP TABLE IF EXISTS `notification`;
+DROP TABLE IF EXISTS `notifications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `notification` (
+CREATE TABLE `notifications` (
   `id` int NOT NULL AUTO_INCREMENT,
   `post_id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -95,30 +96,30 @@ CREATE TABLE `notification` (
   KEY `fk_notification_user_user_id_idx` (`user_id`),
   KEY `fk_notification_comment_comment_id_idx` (`comment_id`),
   KEY `fk_notification_like_like_id_idx` (`like_id`),
-  CONSTRAINT `fk_notification_comment_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comment` (`id`),
-  CONSTRAINT `fk_notification_like_like_id` FOREIGN KEY (`like_id`) REFERENCES `like` (`id`),
-  CONSTRAINT `fk_notification_post_post_Id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
-  CONSTRAINT `fk_notification_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `fk_notification_comment_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`),
+  CONSTRAINT `fk_notification_like_like_id` FOREIGN KEY (`like_id`) REFERENCES `likes` (`id`),
+  CONSTRAINT `fk_notification_post_post_Id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  CONSTRAINT `fk_notification_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `notification`
+-- Dumping data for table `notifications`
 --
 
-LOCK TABLES `notification` WRITE;
-/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `post`
+-- Table structure for table `posts`
 --
 
-DROP TABLE IF EXISTS `post`;
+DROP TABLE IF EXISTS `posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `post` (
+CREATE TABLE `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` varchar(300) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -128,28 +129,28 @@ CREATE TABLE `post` (
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_post_user_user_id_idx` (`user_id`),
-  CONSTRAINT `fk_post_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_post_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post`
+-- Dumping data for table `posts`
 --
 
-LOCK TABLES `post` WRITE;
-/*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'test description','test title','2021-12-15 12:07:30',NULL,'2021-12-15 12:07:30',1),(4,'test end date','test end date','2021-12-15 14:53:26',NULL,'2021-12-15 14:53:25',1);
-/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (1,'test description','test title','2021-12-15 12:07:30',NULL,'2021-12-15 12:07:30',1),(4,'test end date','test end date','2021-12-15 14:53:26',NULL,'2021-12-15 14:53:25',1),(5,'testpost33333333333333','testpost3','2021-12-15 23:52:31',NULL,'2021-12-15 23:52:31',1),(6,'testpost44444444','testpost4','2021-12-16 00:04:33',NULL,'2021-12-16 00:04:33',1);
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `report`
+-- Table structure for table `reports`
 --
 
-DROP TABLE IF EXISTS `report`;
+DROP TABLE IF EXISTS `reports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `report` (
+CREATE TABLE `reports` (
   `id` int NOT NULL AUTO_INCREMENT,
   `reporter_id` int NOT NULL,
   `reported_id` int NOT NULL,
@@ -158,28 +159,28 @@ CREATE TABLE `report` (
   PRIMARY KEY (`id`),
   KEY `fk_report_user_id_idx` (`reporter_id`,`reported_id`),
   KEY `fk_report_user_reported_id_idx` (`reported_id`),
-  CONSTRAINT `fk_report_user_reported_id` FOREIGN KEY (`reported_id`) REFERENCES `user` (`id`),
-  CONSTRAINT `fk_report_user_reporter_id` FOREIGN KEY (`reporter_id`) REFERENCES `user` (`id`)
+  CONSTRAINT `fk_report_user_reported_id` FOREIGN KEY (`reported_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_report_user_reporter_id` FOREIGN KEY (`reporter_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `report`
+-- Dumping data for table `reports`
 --
 
-LOCK TABLES `report` WRITE;
-/*!40000 ALTER TABLE `report` DISABLE KEYS */;
-/*!40000 ALTER TABLE `report` ENABLE KEYS */;
+LOCK TABLES `reports` WRITE;
+/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
+CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
   `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
@@ -188,17 +189,17 @@ CREATE TABLE `user` (
   `created_date` datetime NOT NULL,
   `avatar_url` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'testaccount','testpassword',0,0,'2021-12-15 09:27:21','https://res.cloudinary.com/dqrcn7ljx/image/upload/v1639479467/user_dnxjlf.svg');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'testaccount','testpassword',0,0,'2021-12-15 09:27:21','https://res.cloudinary.com/dqrcn7ljx/image/upload/v1639479467/user_dnxjlf.svg'),(2,'testuser2','testuser2',0,0,'2021-12-15 23:51:37','https://res.cloudinary.com/dqrcn7ljx/image/upload/v1639479467/user_dnxjlf.svg'),(3,'testuser4','testuser4',0,0,'2021-12-15 23:58:55','http://res.cloudinary.com/dqrcn7ljx/image/upload/v1639587535/ok4gxzalugw0uttrz8g2.jpg'),(4,'testuser3','testuser3',0,0,'2021-12-16 00:01:50','https://res.cloudinary.com/dqrcn7ljx/image/upload/v1639479467/user_dnxjlf.svg');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -210,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 21:53:07
+-- Dump completed on 2021-12-16 13:30:40
