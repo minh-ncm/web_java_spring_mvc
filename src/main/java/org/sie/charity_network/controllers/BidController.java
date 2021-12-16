@@ -5,7 +5,9 @@
 package org.sie.charity_network.controllers;
 
 import org.sie.charity_network.POJOs.Bid;
+import org.sie.charity_network.POJOs.Notification;
 import org.sie.charity_network.services.BidService;
+import org.sie.charity_network.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,14 @@ public class BidController {
     private Environment environment;
     @Autowired
     private BidService bidService;
+    @Autowired
+    private NotificationService notificationService;
     @PostMapping("/bid/create/")
     String create(@ModelAttribute("bid") Bid bid, BindingResult bindingResult){
         if(bindingResult.hasErrors())
             return "";
         bidService.addBid(bid);
+        notificationService.addNotification(new Notification(), bid);
         return "redirect:"+environment.getProperty("url.dashboard");
     }
 }

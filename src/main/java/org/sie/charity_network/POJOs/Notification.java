@@ -44,6 +44,9 @@ public class Notification implements Serializable{
     @ManyToOne
     @JoinColumn(name = "like_id")
     private Like like;
+    @ManyToOne
+    @JoinColumn(name = "bid_id")
+    private Bid bid;
 
     public Notification() {
     }
@@ -144,6 +147,20 @@ public class Notification implements Serializable{
      */
     public void setLike(Like like) {
         this.like = like;
+    }
+
+    /**
+     * @return the bid
+     */
+    public Bid getBid() {
+        return bid;
+    }
+
+    /**
+     * @param bid the bid to set
+     */
+    public void setBid(Bid bid) {
+        this.bid = bid;
     }
     
     
