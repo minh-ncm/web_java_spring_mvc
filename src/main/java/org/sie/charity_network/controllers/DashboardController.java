@@ -22,9 +22,9 @@ public class DashboardController {
     private PostService postService;
     
     @GetMapping("/")
-    public String render(@RequestParam(required = false) Map params, Model model) {
+    public String render(@RequestParam(required = false) Map<String, String> params, Model model) {
         int maxResult = 10;
-        int currentPage = Integer.parseInt((String) params.getOrDefault("currentPage", "1"));
+        int currentPage = Integer.parseInt(params.getOrDefault("currentPage", "1"));
         double maxPage = Math.ceil(postService.getPostAmount().intValue() / (double)maxResult);
         
         model.addAttribute("postList", postService.getPost(currentPage, maxResult));

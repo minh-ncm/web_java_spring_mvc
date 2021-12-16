@@ -7,8 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="tile" uri="http://tiles.apache.org/tags-tiles" %>
-<h1>Index content</h1>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<h1>Index content</h1>
 <core:forEach items="${postList}" var="post">
     <div class="card" style="width: 18rem;">
         <img src="..." class="card-img-top" alt="...">
@@ -17,7 +18,7 @@
         <div class="card-body">
           <p class="card-text">${post.description}</p>
           <div class="container btn-group">
-              <a class="btn btn-primary" role="button" href="<core:url value="/like/create/"/>">Like</a>
+              <a class="btn btn-primary" role="button" href="<core:url value="/like/create/"/>?postId=${post.id}&userId=${user.id}">Like</a>
               <a class="btn btn-primary" role="button" href="<core:url value="/comment/create/"/>">Comment</a>
               <a class="btn btn-primary" role="button" href="<core:url value="/bid/create/"/>">Bid</a>
           </div>

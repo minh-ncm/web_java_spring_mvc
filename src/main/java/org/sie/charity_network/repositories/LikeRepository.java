@@ -4,16 +4,12 @@
  */
 package org.sie.charity_network.repositories;
 
-import java.util.List;
-import org.sie.charity_network.POJOs.Post;
+import org.sie.charity_network.POJOs.Like;
 
 /**
  *
  * @author sie
  */
-public interface PostRepository {
-    void addPost(Post post);
-    List<Post> getPost(int page, int maxResult);
-    Post getPost(int id);
-    Long getPostAmount();
+public interface LikeRepository {
+    void addLike(Like like);
 }

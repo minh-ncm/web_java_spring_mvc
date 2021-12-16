@@ -33,6 +33,11 @@ public class PostServiceImplement implements PostService{
     }
 
     @Override
+    public Post getPost(int id) {
+        return postRepository.getPost(id);
+    }
+    
+    @Override
     public Long getPostAmount() {
         return postRepository.getPostAmount();
     }

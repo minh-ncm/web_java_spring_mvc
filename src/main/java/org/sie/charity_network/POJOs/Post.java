@@ -5,9 +5,8 @@
 package org.sie.charity_network.POJOs;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author sie
  */
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 public class Post implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,9 +51,9 @@ public class Post implements Serializable{
     @JoinColumn(name = "winner_id")
     private User winner;
     @OneToMany(mappedBy = "post")
-    private Set<Like> likeSet;
+    private List<Like> likeList;
     @OneToMany(mappedBy = "post")
-    private Set<Comment> commentSet;
+    private List<Comment> commentList;
 
     public Post() {
     }
@@ -160,29 +159,29 @@ public class Post implements Serializable{
     /**
      * @return the likeSet
      */
-    public Set<Like> getLikeSet() {
-        return likeSet;
+    public List<Like> getLikeList() {
+        return likeList;
     }
 
     /**
-     * @param likeSet the likeSet to set
+     * @param likeList the likeSet to set
      */
-    public void setLikeSet(Set<Like> likeSet) {
-        this.likeSet = likeSet;
+    public void setLikeList(List<Like> likeList) {
+        this.likeList = likeList;
     }
 
     /**
      * @return the commentSet
      */
-    public Set<Comment> getCommentSet() {
-        return commentSet;
+    public List<Comment> getCommentList() {
+        return commentList;
     }
 
     /**
-     * @param commentSet the commentSet to set
+     * @param commentList the commentSet to set
      */
-    public void setCommentSet(Set<Comment> commentSet) {
-        this.commentSet = commentSet;
+    public void setCommentList(List<Comment> commentList) {
+        this.commentList = commentList;
     }
     
     
