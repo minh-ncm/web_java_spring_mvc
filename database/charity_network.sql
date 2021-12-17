@@ -33,7 +33,7 @@ CREATE TABLE `bids` (
   KEY `fk_bids_users_user_id_idx` (`user_id`),
   CONSTRAINT `fk_bids_posts_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_bids_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `bids` (
 
 LOCK TABLES `bids` WRITE;
 /*!40000 ALTER TABLE `bids` DISABLE KEYS */;
+INSERT INTO `bids` VALUES (1,3132123.00,'2021-12-16 22:15:29',1,1),(2,343.12,'2021-12-16 22:18:52',4,1);
 /*!40000 ALTER TABLE `bids` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +64,7 @@ CREATE TABLE `comments` (
   KEY `fk_comment_post_post_id_idx` (`post_id`),
   CONSTRAINT `fk_comment_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_comment_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +73,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-INSERT INTO `comments` VALUES (1,'asdfasdf',1,1,'2021-12-16 20:49:15'),(2,'asdfasdf',1,4,'2021-12-16 20:51:24'),(3,'fgsdfgsdfg',1,8,'2021-12-16 20:53:16'),(4,'ghhdgfhdh',1,7,'2021-12-16 20:54:02');
+INSERT INTO `comments` VALUES (1,'asdfasdf',1,1,'2021-12-16 20:49:15'),(2,'asdfasdf',1,4,'2021-12-16 20:51:24'),(3,'fgsdfgsdfg',1,8,'2021-12-16 20:53:16'),(4,'ghhdgfhdh',1,7,'2021-12-16 20:54:02'),(5,'ghhdgfhdh',1,7,'2021-12-16 21:00:00'),(6,'',1,1,'2021-12-16 21:00:04'),(7,'teadfa',1,1,'2021-12-16 22:34:15'),(8,'testaxfa',1,1,'2021-12-16 22:35:28'),(9,'dfasdfa',1,1,'2021-12-16 22:36:06'),(10,'asdfasdf',1,1,'2021-12-16 22:36:13'),(11,'',1,1,'2021-12-16 22:36:37'),(12,'',1,1,'2021-12-16 22:38:56'),(13,'test',1,1,'2021-12-16 22:39:47'),(14,'',1,4,'2021-12-16 22:53:20');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,15 +122,18 @@ CREATE TABLE `notifications` (
   `is_read` tinyint(1) DEFAULT '0',
   `comment_id` int DEFAULT NULL,
   `like_id` int DEFAULT NULL,
+  `bid_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_notification_post_post_Id_idx` (`post_id`),
   KEY `fk_notification_user_user_id_idx` (`user_id`),
   KEY `fk_notification_comment_comment_id_idx` (`comment_id`),
   KEY `fk_notification_like_like_id_idx` (`like_id`),
+  KEY `fk_notifications_bid_bid_id_idx` (`bid_id`),
   CONSTRAINT `fk_notification_comment_comment_id` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`),
   CONSTRAINT `fk_notification_like_like_id` FOREIGN KEY (`like_id`) REFERENCES `likes` (`id`),
   CONSTRAINT `fk_notification_post_post_Id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
-  CONSTRAINT `fk_notification_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  CONSTRAINT `fk_notification_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_notifications_bid_bid_id` FOREIGN KEY (`bid_id`) REFERENCES `bids` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -241,4 +245,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-16 20:58:03
+-- Dump completed on 2021-12-16 23:31:03

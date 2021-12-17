@@ -6,11 +6,9 @@ package org.sie.charity_network.controllers;
 
 import java.util.Map;
 import org.sie.charity_network.POJOs.Like;
-import org.sie.charity_network.POJOs.Post;
-import org.sie.charity_network.POJOs.User;
+import org.sie.charity_network.POJOs.Notification;
 import org.sie.charity_network.services.LikeService;
-import org.sie.charity_network.services.PostService;
-import org.sie.charity_network.services.UserService;
+import org.sie.charity_network.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -32,13 +30,12 @@ public class LikeController {
     @Autowired
     private LikeService likeService;
     @Autowired
-    private UserService userService;
-    @Autowired
-    private PostService postService;
+    private NotificationService notificationService;
     
     @PostMapping("like/create/")
     String create(@ModelAttribute("like") Like like, Model model) {
         likeService.addLike(like);
+        notificationService.addNotification(new Notification(), like);
         return "redirect:"+environment.getProperty("url.dashboard");
     }
 }
