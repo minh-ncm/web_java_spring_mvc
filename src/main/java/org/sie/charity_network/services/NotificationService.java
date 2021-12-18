@@ -14,7 +14,7 @@ import org.sie.charity_network.POJOs.Notification;
  * @author sie
  */
 public interface NotificationService {
-    void addNotification(Notification notification, Comment comment);
-    void addNotification(Notification notification, Like like);
-    void addNotification(Notification notification, Bid bid);
+    void addNotification(Comment comment);
+    void addNotification(Like like);
+    void addNotification(Bid bid);
 }

@@ -35,7 +35,7 @@ public class BidController {
     @PostMapping("/bid/create/")
     String create(@ModelAttribute("bid")Bid bid){
         bidService.addBid(bid);
-        notificationService.addNotification(new Notification(), bid);
+        notificationService.addNotification(bid);
         return "redirect:"+environment.getProperty("url.dashboard");
     }
 }
