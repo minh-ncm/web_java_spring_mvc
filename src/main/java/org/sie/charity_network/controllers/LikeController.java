@@ -35,7 +35,7 @@ public class LikeController {
     @PostMapping("like/create/")
     String create(@ModelAttribute("like") Like like, Model model) {
         likeService.addLike(like);
-        notificationService.addNotification(new Notification(), like);
+        notificationService.addNotification(like);
         return "redirect:"+environment.getProperty("url.dashboard");
     }
 }

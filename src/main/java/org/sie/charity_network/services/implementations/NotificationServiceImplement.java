@@ -24,7 +24,9 @@ public class NotificationServiceImplement implements NotificationService{
     private NotificationRepository notificationRepository;
 
     @Override
-    public void addNotification(Notification notification, Comment comment) {
+    public void addNotification(Comment comment) {
+        Notification notification = new Notification();
+        notification.setIsRead(false);
         notification.setCreatedDate(new Date());
         notification.setComment(comment);
         notification.setUser(comment.getUser());
@@ -33,7 +35,9 @@ public class NotificationServiceImplement implements NotificationService{
     }
     
     @Override
-    public void addNotification(Notification notification, Like like) {
+    public void addNotification(Like like) {
+        Notification notification = new Notification();
+        notification.setIsRead(false);
         notification.setCreatedDate(new Date());
         notification.setLike(like);
         notification.setUser(like.getUser());
@@ -42,7 +46,9 @@ public class NotificationServiceImplement implements NotificationService{
     }
     
     @Override
-    public void addNotification(Notification notification, Bid bid) {
+    public void addNotification(Bid bid) {
+        Notification notification = new Notification();
+        notification.setIsRead(false);
         notification.setCreatedDate(new Date());
         notification.setBid(bid);
         notification.setUser(bid.getUser());
