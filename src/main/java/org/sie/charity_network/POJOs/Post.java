@@ -18,9 +18,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -36,6 +38,7 @@ public class Post implements Serializable{
     private String description;
     @Size(min = 5, max = 50, message = "{post.title.size}")
     private String title;
+    private String imageUrl;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
@@ -56,6 +59,9 @@ public class Post implements Serializable{
     private List<Comment> commentList;
     @OneToMany(mappedBy = "post")
     private List<Bid> bidList;
+    @NotNull(message = "{post.imageFile.notnull}")
+    @Transient
+    private MultipartFile imageFile;
 
     public Post() {
     }
@@ -198,6 +204,34 @@ public class Post implements Serializable{
      */
     public void setBidList(List<Bid> bidList) {
         this.bidList = bidList;
+    }
+
+    /**
+     * @return the imageUrl
+     */
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    /**
+     * @param imageUrl the imageUrl to set
+     */
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    /**
+     * @return the imageFile
+     */
+    public MultipartFile getImageFile() {
+        return imageFile;
+    }
+
+    /**
+     * @param imageFile the imageFile to set
+     */
+    public void setImageFile(MultipartFile imageFile) {
+        this.imageFile = imageFile;
     }
     
     

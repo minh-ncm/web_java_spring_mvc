@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.sie.charity_network.formatter.*;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 /**
  *
@@ -43,6 +44,11 @@ public class WebAppContextConfig implements WebMvcConfigurer{
     @Override
     public Validator getValidator() {
         return getLocalValidatorFactoryBean();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
     }
 
     @Override

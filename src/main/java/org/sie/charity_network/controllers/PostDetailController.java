@@ -9,8 +9,11 @@ import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Notification;
+import org.sie.charity_network.services.BidService;
 import org.sie.charity_network.services.CommentService;
 import org.sie.charity_network.services.NotificationService;
+import org.sie.charity_network.services.PostService;
+import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -25,18 +29,22 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author sie
  */
 @Controller
-public class CommentController {
+public class PostDetailController {
     @Autowired
     private Environment environment;
     @Autowired
-    private CommentService commentService;
+    private PostService postService;
     @Autowired
-    private NotificationService notificationService;
+    private UserService userService;
     
-    @PostMapping("/comment/create/")
-    String create(@ModelAttribute("comment")Comment comment) {
-        commentService.addComment(comment);
-        notificationService.addNotification(new Notification(), comment);
-        return "redirect:"+environment.getProperty("url.dashboard");
+    @GetMapping("/post/{id}/")
+    String renderPostDetail(@PathVariable String id, Model model) {
+        model.addAttribute("user", userService.getUser(1)); // remove when have authentication
+        model.addAttribute("post", postService.getPost(Integer.parseInt(id)));
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("bid", new Bid());
+        model.addAttribute("like", new Like());
+        return "postDetail";
     }
+        
 }

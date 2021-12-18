@@ -23,4 +23,8 @@
         <put-attribute name="title" value="Post creation" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/postCreation.jsp" />
     </definition>
+    <definition name="postDetail" extends="baseLayout">
+        <put-attribute name="title" value="Post details" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/postDetail.jsp" />
+    </definition>
 </tiles-definitions>
