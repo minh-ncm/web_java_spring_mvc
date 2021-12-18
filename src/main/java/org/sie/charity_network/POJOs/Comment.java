@@ -21,6 +21,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -32,8 +33,6 @@ public class Comment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @NotNull(message = "{comment.text.notnull}")
-//    @Max(value = 300, message = "{comment.text.max}")
     private String text;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")

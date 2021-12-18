@@ -4,8 +4,14 @@
  */
 package org.sie.charity_network.services.implementations;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.sie.charity_network.POJOs.Post;
 import org.springframework.stereotype.Service;
 import org.sie.charity_network.services.PostService;
@@ -19,11 +25,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class PostServiceImplement implements PostService{
     @Autowired
+    private Cloudinary cloudinary;
+    @Autowired
     private PostRepository postRepository;
 
     @Override
     public void addPost(Post post) {
         post.setCreatedDate(new Date());
+        try {
+            Map uploadResult = cloudinary.uploader().upload(
+                    post.getImageFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto")
+            );
+            post.setImageUrl((String) uploadResult.get("url"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         postRepository.addPost(post);
     }    
 
