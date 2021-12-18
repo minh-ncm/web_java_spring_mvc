@@ -35,11 +35,11 @@
                   </form:select>
                       <button class="btn btn-primary" type="submit">Like</button>
     </form:form>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm${post.id}" aria-expanded="false" aria-controls="commentForm${post.id}" >Comment</button>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bidForm${post.id}" aria-expanded="false" aria-controls="bidForm${post.id}">Bid</button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm" aria-expanded="false" aria-controls="commentForm" >Comment</button>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bidForm" aria-expanded="false" aria-controls="bidForm">Bid</button>
 </div>
 <div class="collapse" id="commentForm">
-    <form:form method="post" modelAttribute="comment" action="${commentCreateUrl}" onsubmit="event.preventDefault(); validateComment();">
+    <form:form method="post" modelAttribute="comment" action="${commentCreateUrl}" onsubmit="return validateComment();">
             <form:select path="user" id="user" cssStyle="display:none;">
                 <option value="${user.id}"></option>
             </form:select>
@@ -53,7 +53,7 @@
       </div>
           
     <div class="collapse" id="bidForm">
-        <form:form method="post" modelAttribute="bid" action="${bidCreateUrl}" onsubmit="event.preventDefault(); validateBid();">
+        <form:form method="post" modelAttribute="bid" action="${bidCreateUrl}" onsubmit="return validateBid();">
             <form:select path="user" id="user" cssStyle="display:none;">
                 <option value="${user.id}"></option>
             </form:select>

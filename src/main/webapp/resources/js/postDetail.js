@@ -5,14 +5,13 @@
 
 
 function validateBid() {
-    let amount = document.getElementById("bidAmount").value;
-    let parts = amount.split(".");
+    let amount = parseFloat(document.getElementById("bidAmount").value);
     let errorText = "";
-    if (parts[0].length <= 15 && amount.length > 0)
+    if (amount < 1e16 && amount > 0)
         return true;
-    if (amount.length === 0)
+    if (amount <= 0 || isNaN(amount))
         errorText = "Bid's amount can't be zero";
-    if (parts[0].length > 15)
+    if (amount >= 1e16)
         errorText = "value can't exceed 15 ditgits";
 
     document.getElementById("bidAmountError").innerHTML = errorText;
