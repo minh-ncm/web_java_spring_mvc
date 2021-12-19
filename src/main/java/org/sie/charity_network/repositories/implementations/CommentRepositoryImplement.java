@@ -45,6 +45,18 @@ public class CommentRepositoryImplement implements CommentRepository{
         Query query = session.createQuery(criteriaQuery);
         return (Long) query.getSingleResult();
     }
+
+    @Override
+    public List<Comment> getCommentList(Post post) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Comment> criteriaQuery = builder.createQuery(Comment.class);
+        Root<Comment> commentRoot = criteriaQuery.from(Comment.class);
+        criteriaQuery.where(builder.equal(commentRoot.get("post"), post.getId()));
+        criteriaQuery.orderBy(builder.desc(commentRoot.get("createdDate")));
+        Query query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
     
     
 }

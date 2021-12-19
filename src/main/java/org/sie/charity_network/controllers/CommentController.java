@@ -37,6 +37,6 @@ public class CommentController {
     String create(@ModelAttribute("comment")Comment comment) {
         commentService.addComment(comment);
         notificationService.addNotification(comment);
-        return "redirect:"+environment.getProperty("url.dashboard");
+        return String.format("redirect:/post/%d/", comment.getPost().getId());
     }
 }

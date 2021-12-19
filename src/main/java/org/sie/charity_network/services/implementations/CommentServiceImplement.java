@@ -10,6 +10,7 @@ import org.sie.charity_network.repositories.CommentRepository;
 import java.util.Date;
 import java.util.List;
 import org.sie.charity_network.POJOs.Comment;
+import org.sie.charity_network.POJOs.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -25,6 +26,16 @@ public class CommentServiceImplement implements CommentService{
     public void addComment(Comment comment) {
         comment.setCreatedDate(new Date());
         commentRepository.addComment(comment);
+    }
+
+    @Override
+    public Long getCommentAmount(Post post) {
+        return commentRepository.getCommentAmount(post);
+    }
+
+    @Override
+    public List getCommentList(Post post) {
+        return commentRepository.getCommentList(post);
     }
 
     

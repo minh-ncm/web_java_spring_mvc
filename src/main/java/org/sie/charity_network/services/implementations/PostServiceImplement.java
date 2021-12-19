@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.sie.charity_network.POJOs.Post;
 import org.springframework.stereotype.Service;
 import org.sie.charity_network.services.PostService;
