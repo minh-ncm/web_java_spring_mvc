@@ -4,6 +4,8 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,6 +13,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Post;
+import org.sie.charity_network.repositories.CommentRepository;
+import org.sie.charity_network.repositories.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -26,6 +30,10 @@ import org.sie.charity_network.repositories.PostRepository;
 public class PostRepositoryImplement implements PostRepository{
     @Autowired
     private LocalSessionFactoryBean localSessionFactoryBean;
+    @Autowired
+    private LikeRepository likeRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Override
     public void addPost(Post post) {
@@ -67,6 +75,32 @@ public class PostRepositoryImplement implements PostRepository{
         criteriaQuery.select(builder.count(postRoot));
         Query query = session.createQuery(criteriaQuery);
         return (Long) query.getSingleResult();
+    }
+
+    @Override
+    public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Post> criteriaQuery = builder.createQuery(Post.class);
+        Root<Post> postRoot = criteriaQuery.from(Post.class);
+        criteriaQuery.where(builder.between(postRoot.get("createdDate").as(Date.class), afterDate, beforeDate));
+        Query query = session.createQuery(criteriaQuery);
+        List<Post> postList = query.getResultList();
+
+        List<Object[]> result = new ArrayList<>();
+        for(Post post : postList) {
+            Long likeAmount = likeRepository.getLikeAmount(post);
+            Long commentAmount = commentRepository.getCommentAmount(post);
+            Object[] objectList = {
+                post.getId(),
+                post.getCreatedDate(),
+                likeAmount,
+                commentAmount,
+            };
+            result.add(objectList);
+        }
+        
+        return result;
     }
 
    

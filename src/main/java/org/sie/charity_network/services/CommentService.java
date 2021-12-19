@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.services;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.Comment;
 
 /**

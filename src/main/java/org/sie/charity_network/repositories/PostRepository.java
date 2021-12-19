@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.repositories;
 
+import java.util.Date;
 import java.util.List;
 import org.sie.charity_network.POJOs.Post;
 
@@ -16,4 +17,5 @@ public interface PostRepository {
     List<Post> getPost(int page, int maxResult);
     Post getPost(int id);
     Long getPostAmount();
+    List<Object[]> getPostStatistic(Date afterDate, Date beforeDate);
 }

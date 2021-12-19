@@ -4,8 +4,14 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Like;
+import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.repositories.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -26,6 +32,18 @@ public class LikeRepositoryImplement implements LikeRepository{
     public void addLike(Like like) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         session.save(like);
+    }
+
+    @Override
+    public Long getLikeAmount(Post post) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
+        Root<Like> likeRoot = criteriaQuery.from(Like.class);
+        criteriaQuery.where(builder.equal(likeRoot.get("post"), post.getId()));
+        criteriaQuery.select(builder.count(likeRoot.get("id")));
+        Query query = session.createQuery(criteriaQuery);
+        return (Long) query.getSingleResult();
     }
     
 }

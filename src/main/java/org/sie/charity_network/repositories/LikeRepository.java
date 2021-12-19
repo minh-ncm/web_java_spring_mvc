@@ -4,7 +4,9 @@
  */
 package org.sie.charity_network.repositories;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.Like;
+import org.sie.charity_network.POJOs.Post;
 
 /**
  *
@@ -12,4 +14,5 @@ import org.sie.charity_network.POJOs.Like;
  */
 public interface LikeRepository {
     void addLike(Like like);
+    Long getLikeAmount(Post post);
 }
