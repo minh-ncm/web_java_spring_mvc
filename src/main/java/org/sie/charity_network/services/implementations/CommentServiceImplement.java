@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.sie.charity_network.services.CommentService;
 import org.sie.charity_network.repositories.CommentRepository;
 import java.util.Date;
+import java.util.List;
 import org.sie.charity_network.POJOs.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +26,6 @@ public class CommentServiceImplement implements CommentService{
         comment.setCreatedDate(new Date());
         commentRepository.addComment(comment);
     }
-    
+
     
 }

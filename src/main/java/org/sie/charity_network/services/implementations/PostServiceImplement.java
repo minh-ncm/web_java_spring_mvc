@@ -58,5 +58,11 @@ public class PostServiceImplement implements PostService{
     public Long getPostAmount() {
         return postRepository.getPostAmount();
     }
+
+    @Override
+    public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate) {
+        return postRepository.getPostStatistic(afterDate, beforeDate);
+    }
+    
     
 }

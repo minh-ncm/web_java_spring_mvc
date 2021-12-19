@@ -5,6 +5,8 @@
 package org.sie.charity_network.services.implementations;
 
 import java.util.Date;
+import java.util.List;
+import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.POJOs.User;
@@ -36,6 +38,6 @@ public class LikeServiceImplement implements LikeService{
         like.setCreatedDate(new Date());
         likeRepository.addLike(like);
     }
-    
+
     
 }

@@ -4,11 +4,17 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.sie.charity_network.repositories.CommentRepository;
 import org.sie.charity_network.POJOs.Comment;
+import org.sie.charity_network.POJOs.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
@@ -27,5 +33,18 @@ public class CommentRepositoryImplement implements CommentRepository{
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         session.save(comment);
     }
+
+    @Override
+    public Long getCommentAmount(Post post) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
+        Root<Comment> commentRoot = criteriaQuery.from(Comment.class);
+        criteriaQuery.where(builder.equal(commentRoot.get("post"), post.getId()));
+        criteriaQuery.select(builder.count(commentRoot.get("id")));
+        Query query = session.createQuery(criteriaQuery);
+        return (Long) query.getSingleResult();
+    }
+    
     
 }
