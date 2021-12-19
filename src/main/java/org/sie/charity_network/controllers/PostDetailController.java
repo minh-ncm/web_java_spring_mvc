@@ -9,6 +9,7 @@ import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Notification;
+import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.services.BidService;
 import org.sie.charity_network.services.CommentService;
 import org.sie.charity_network.services.NotificationService;
@@ -36,11 +37,15 @@ public class PostDetailController {
     private PostService postService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CommentService commentService;
     
     @GetMapping("/post/{id}/")
     String renderPostDetail(@PathVariable String id, Model model) {
         model.addAttribute("user", userService.getUser(1)); // remove when have authentication
-        model.addAttribute("post", postService.getPost(Integer.parseInt(id)));
+        Post post = postService.getPost(Integer.parseInt(id));
+        model.addAttribute("post", post);
+        model.addAttribute("commentList", commentService.getCommentList(post));
         model.addAttribute("comment", new Comment());
         model.addAttribute("bid", new Bid());
         model.addAttribute("like", new Like());

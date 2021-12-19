@@ -6,6 +6,7 @@ package org.sie.charity_network.services;
 
 import java.util.List;
 import org.sie.charity_network.POJOs.Comment;
+import org.sie.charity_network.POJOs.Post;
 
 /**
  *
@@ -13,4 +14,6 @@ import org.sie.charity_network.POJOs.Comment;
  */
 public interface CommentService {
     void addComment(Comment comment);
+    Long getCommentAmount(Post post);
+    List getCommentList(Post post);
 }

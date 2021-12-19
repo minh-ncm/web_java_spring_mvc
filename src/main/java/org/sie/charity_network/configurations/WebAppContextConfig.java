@@ -30,7 +30,12 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
  * @author sie
  */
 @Configuration
-@ComponentScan("org.sie.charity_network")
+@ComponentScan(basePackages = {
+    "org.sie.charity_network.controllers",
+    "org.sie.charity_network.repositories",
+    "org.sie.charity_network.services",
+    "org.sie.charity_network.validators",
+})
 @EnableWebMvc
 @EnableTransactionManagement
 @PropertySource("classpath:properties/urls.properties")
@@ -43,7 +48,7 @@ public class WebAppContextConfig implements WebMvcConfigurer{
 
     @Override
     public Validator getValidator() {
-        return getLocalValidatorFactoryBean();
+        return validator();
     }
 
     @Override
@@ -58,7 +63,7 @@ public class WebAppContextConfig implements WebMvcConfigurer{
     }
 
     @Bean
-    public LocalValidatorFactoryBean getLocalValidatorFactoryBean() {
+    public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
         validator.setValidationMessageSource(messageSource());
         return validator;

@@ -33,19 +33,14 @@ public class UserServiceImplement implements UserService{
         user.setCreatedDate(new Date());
         user.setIsAdmin(false);
         user.setIsReport(false);
-        if(user.getImageFile().isEmpty())
-            user.setAvatarUrl("https://res.cloudinary.com/dqrcn7ljx/image/upload/v1639479467/user_dnxjlf.svg");
-        else
-        {
-            try {
-                Map uploadResult = cloudinary.uploader().upload(
-                        user.getImageFile().getBytes(),
-                        ObjectUtils.asMap("resource_type", "auto"));
-                user.setAvatarUrl((String) uploadResult.get("url"));
-            } catch (IOException ex) {
-                System.err.println("upload image failed");
-                ex.printStackTrace();
-            }
+        try {
+            Map uploadResult = cloudinary.uploader().upload(
+                    user.getImageFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            user.setAvatarUrl((String) uploadResult.get("url"));
+        } catch (IOException ex) {
+            System.err.println("upload image failed");
+            ex.printStackTrace();
         }
         userRepository.addUser(user);
     }

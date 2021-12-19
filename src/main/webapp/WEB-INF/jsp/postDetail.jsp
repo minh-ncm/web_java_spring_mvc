@@ -25,21 +25,22 @@
     <p class="text-muted">Ending at: ${post.endDate}</p>
     <p>${post.description}</p>
 </div>
-<div class="btn-group">
-    <form:form method="post" modelAttribute="like" action="${likeCreateUrl}" cssClass="likeHiddenForm">
-                  <form:select path="user" id="user" cssStyle="display:none;">
-                      <option value="${user.id}"></option>
-                  </form:select>
-                  <form:select path="post" id="post" cssStyle="display:none;">
-                      <option value="${post.id}">${post.id}</option>
-                  </form:select>
-                      <button class="btn btn-primary" type="submit">Like</button>
-    </form:form>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm" aria-expanded="false" aria-controls="commentForm" >Comment</button>
-    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bidForm" aria-expanded="false" aria-controls="bidForm">Bid</button>
-</div>
-<div class="collapse" id="commentForm">
-    <form:form method="post" modelAttribute="comment" action="${commentCreateUrl}" onsubmit="return validateComment();">
+<div>
+    <div class="btn-group">
+        <form:form method="post" modelAttribute="like" action="${likeCreateUrl}" cssClass="likeHiddenForm">
+                      <form:select path="user" id="user" cssStyle="display:none;">
+                          <option value="${user.id}"></option>
+                      </form:select>
+                      <form:select path="post" id="post" cssStyle="display:none;">
+                          <option value="${post.id}">${post.id}</option>
+                      </form:select>
+                          <button class="btn btn-primary" type="submit">Like</button>
+        </form:form>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm" aria-expanded="false" aria-controls="commentForm" >Comment</button>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bidForm" aria-expanded="false" aria-controls="bidForm">Bid</button>
+    </div>
+    <div class="collapse" id="commentForm">
+        <form:form method="post" modelAttribute="comment" action="${commentCreateUrl}" onsubmit="return validateComment();">
             <form:select path="user" id="user" cssStyle="display:none;">
                 <option value="${user.id}"></option>
             </form:select>
@@ -65,3 +66,20 @@
             <button class="btn btn-primary" type="submit">Bid</button>
         </form:form>
     </div> 
+</div>
+<div>
+    <ul class="list-group">
+        <core:forEach items="${commentList}" var="comment">
+            <li class="list-group-item">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">${comment.user.username}</h4>
+                        <h6 class="card-subtitle text-muted">Commented on: ${comment.createdDate}</h6>
+                        <hr/>
+                        <p class="card-text">${comment.text}</p>
+                    </div>
+                </div>
+            </li>
+        </core:forEach>
+    </ul>
+</div>

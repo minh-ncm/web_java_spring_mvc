@@ -45,6 +45,6 @@ public class PostController {
         post.setEndDate(new Date());
         post.setOwner(userService.getUser(1));
         postService.addPost(post);
-        return "redirect:"+environment.getProperty("url.dashboard");
+        return String.format("redirect:/post/%d/", post.getId());
     }
 }

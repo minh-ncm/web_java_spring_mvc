@@ -22,18 +22,19 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 @Configuration
 @PropertySource("classpath:properties/hibernateConfigurations.properties")
 public class HibernateConfigurations {
+
     @Autowired
     private Environment environment;
-    
+
     @Bean
-    public LocalSessionFactoryBean getLocalSessionFactoryBean(){
+    public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setPackagesToScan(new String[] {"org.sie.charity_network.POJOs"});
+        factoryBean.setPackagesToScan(new String[]{"org.sie.charity_network.POJOs"});
         factoryBean.setDataSource(getDataSource());
         factoryBean.setHibernateProperties(getHibernateProperties());
         return factoryBean;
     }
-    
+
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -43,18 +44,18 @@ public class HibernateConfigurations {
         dataSource.setPassword(environment.getProperty("hibernate.connection.password"));
         return dataSource;
     }
-    
+
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put(org.hibernate.cfg.Environment.DIALECT, environment.getProperty("hibernate.dialect"));
         properties.put(org.hibernate.cfg.Environment.SHOW_SQL, environment.getProperty("hibernate.showSql"));
         return properties;
     }
-    
+
     @Bean
-    public HibernateTransactionManager getTransactionManager() {
+    public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager manager = new HibernateTransactionManager();
-        manager.setSessionFactory(getLocalSessionFactoryBean().getObject());
+        manager.setSessionFactory(getSessionFactory().getObject());
         return manager;
     }
 }
