@@ -104,9 +104,29 @@ public class PostRepositoryImplement implements PostRepository{
     }
 
     @Override
-    public void updatePost(Post updatedPost) {
+    public boolean updatePost(Post post, Post updatedPost) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
-        session.update(updatedPost);
+        post.setTitle(updatedPost.getTitle());
+        post.setDescription(updatedPost.getDescription());
+        try {
+            session.update(post);    
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deletePost(Post post) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        try {
+            session.delete(post);   
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     

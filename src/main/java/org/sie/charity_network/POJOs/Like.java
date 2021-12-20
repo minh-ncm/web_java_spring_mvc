@@ -7,6 +7,7 @@ package org.sie.charity_network.POJOs;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Like implements Serializable{
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
-    @OneToMany(mappedBy = "like")
+    @OneToMany(mappedBy = "like", cascade = CascadeType.REMOVE)
     private List<Notification> notificationList;
 
     public Like() {

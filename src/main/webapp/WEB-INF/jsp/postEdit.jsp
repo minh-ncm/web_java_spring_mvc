@@ -20,8 +20,12 @@
         <form:textarea path="description" type="text-area" cssClass="form-control" id="description" rows="5"/>
         <form:errors path="description" element="p" cssClass="text text-danger"/>
     </div>
-    <div class="btn-group">
-        <button class="btn btn-success" type="submit">Update</button>
-        <a href="<core:url value="/post/${post.id}/delete/"/>" class="btn btn-danger">Delete</a>
-    </div>
+    <p class="text text-danger">${errors}</p>
+    <button class="btn btn-success" type="submit">Update</button>
 </form:form>
+<core:url value="/post/${post.id}/delete/" var="deleteActionUrl"/>
+<form:form modelAttribute="post" action="${deleteActionUrl}" method="post">
+    <button class="btn btn-danger">Delete</button>
+</form:form>
+    
+    

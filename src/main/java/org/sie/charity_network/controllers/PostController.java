@@ -82,4 +82,13 @@ public class PostController {
         postService.updatePost(Integer.parseInt(postId), post);
         return String.format("redirect:/post/%s/", postId);
     }
+    
+    
+    @PostMapping("/post/{postId}/delete/")
+    public String deletePost(@ModelAttribute("post") Post post, @PathVariable String postId, Model model){
+        if (postService.deletePost(Integer.parseInt(postId)))
+            return String.format("redirect:%s", environment.getProperty("url.dashboard"));
+        model.addAttribute("errors", "Something wrong. Can't delete post.");
+        return "postEdit";
+    }
 }
