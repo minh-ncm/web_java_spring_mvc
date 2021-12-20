@@ -18,4 +18,5 @@ public interface PostService {
     Post getPost(int id);
     Long getPostAmount();
     List<Object[]> getPostStatistic(Date afterDate, Date beforeDate);
+    void updatePost(int postId, Post updatedPost);
 }

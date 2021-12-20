@@ -103,5 +103,12 @@ public class PostRepositoryImplement implements PostRepository{
         return result;
     }
 
-   
+    @Override
+    public void updatePost(Post updatedPost) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        session.update(updatedPost);
+    }
+
+    
+    
 }

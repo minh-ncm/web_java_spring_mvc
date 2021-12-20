@@ -61,6 +61,14 @@ public class PostServiceImplement implements PostService{
     public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate) {
         return postRepository.getPostStatistic(afterDate, beforeDate);
     }
+
+    @Override
+    public void updatePost(int postId, Post updatedPost) {
+        Post post = postRepository.getPost(postId);
+        post.setTitle(updatedPost.getTitle());
+        post.setDescription(updatedPost.getDescription());
+        postRepository.updatePost(post);
+    }
     
     
 }

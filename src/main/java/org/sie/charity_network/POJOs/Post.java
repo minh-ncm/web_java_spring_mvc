@@ -46,7 +46,6 @@ public class Post implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_date")
-    @NotNull(message = "{post.endDate.notnull}")
     private Date endDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -60,7 +59,6 @@ public class Post implements Serializable{
     private List<Comment> commentList;
     @OneToMany(mappedBy = "post")
     private List<Bid> bidList;
-    @NotNull(message = "{post.imageFile.notnull}")
     @Transient
     private MultipartFile imageFile;
 

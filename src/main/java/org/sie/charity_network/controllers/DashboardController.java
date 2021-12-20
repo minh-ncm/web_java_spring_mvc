@@ -30,7 +30,7 @@ public class DashboardController {
     
     @GetMapping("/")
     public String render(@RequestParam(required = false) Map<String, String> params, Model model) {
-        int maxResult = 10;
+        int maxResult = 2;
         int currentPage = Integer.parseInt(params.getOrDefault("currentPage", "1"));
         double maxPage = Math.ceil(postService.getPostAmount().intValue() / (double)maxResult);
         
