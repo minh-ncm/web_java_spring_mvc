@@ -7,6 +7,7 @@ package org.sie.charity_network.POJOs;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,7 +47,6 @@ public class Post implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_date")
-    @NotNull(message = "{post.endDate.notnull}")
     private Date endDate;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -54,13 +54,12 @@ public class Post implements Serializable{
     @ManyToOne
     @JoinColumn(name = "winner_id")
     private User winner;
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Like> likeList;
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> commentList;
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Bid> bidList;
-    @NotNull(message = "{post.imageFile.notnull}")
     @Transient
     private MultipartFile imageFile;
 

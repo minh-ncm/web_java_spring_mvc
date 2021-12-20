@@ -23,6 +23,7 @@
     <img src="${post.imageUrl}" class="img-fluid" alt="${post.title}">
     <p class="h2">${post.title}</p> 
     <p class="text-muted">Ending at: ${post.endDate}</p>
+    <a href="edit/">Edit post</a>
     <p>${post.description}</p>
 </div>
 <div>

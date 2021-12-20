@@ -18,4 +18,6 @@ public interface PostRepository {
     Post getPost(int id);
     Long getPostAmount();
     List<Object[]> getPostStatistic(Date afterDate, Date beforeDate);
+    boolean updatePost(Post post, Post updatedPost);
+    boolean deletePost(Post post);
 }

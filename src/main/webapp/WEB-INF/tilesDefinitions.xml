@@ -31,4 +31,8 @@
         <put-attribute name="title" value="Admin page" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/adminHome.jsp" />
     </definition>
+    <definition name="postEdit" extends="baseLayout">
+        <put-attribute name="title" value="Post edit page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/postEdit.jsp" />
+    </definition>
 </tiles-definitions>

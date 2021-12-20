@@ -7,9 +7,12 @@ package org.sie.charity_network.services.implementations;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.sie.charity_network.POJOs.Post;
 import org.springframework.stereotype.Service;
 import org.sie.charity_network.services.PostService;
@@ -60,6 +63,29 @@ public class PostServiceImplement implements PostService{
     @Override
     public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate) {
         return postRepository.getPostStatistic(afterDate, beforeDate);
+    }
+
+    @Override
+    public boolean updatePost(int postId, Post updatedPost) {
+        Post post = postRepository.getPost(postId);
+        return postRepository.updatePost(post, updatedPost);
+    }
+
+    @Override
+    public boolean deletePost(int postId) {
+        Post post = postRepository.getPost(postId);
+        String parts[] = post.getImageUrl().split("/");
+        String imageId = parts[parts.length-1].split("\\.")[0];
+        try {
+            cloudinary.uploader().destroy(
+                    imageId,
+                    ObjectUtils.asMap("resource_type", "image"));
+        } catch (IOException ex) {
+            Logger.getLogger(PostServiceImplement.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            return false;
+        }
+        return postRepository.deletePost(post);
     }
     
     

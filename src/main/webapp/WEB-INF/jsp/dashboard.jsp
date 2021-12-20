@@ -9,22 +9,22 @@
 <%@taglib prefix="tile" uri="http://tiles.apache.org/tags-tiles" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<script src="<core:url value="/js/dashboard.js"/>" type="text/javascript"></script>
 
-<h1>Index content</h1>
-<div class="row-md">
-    <core:set var="index" value="0"/>
-    <core:set var="maxPerRow" value="5"/>
+<div class="container">
+    <h1>Index content</h1>  
+    <div class="row-md">
     <core:forEach items="${postList}" var="post">
-        <a href="<core:url value="/post/${post.id}/"/>">
-                <div class="card col-md-4" >
+        <div class="col-md-4">
+            <div class="card" onclick="window.location.href = 'post/${post.id}/';" >
                 <img src="${post.imageUrl}" class="card-img-top" alt="${post.title}"/>
                 <h3 class="card-title">${post.title}</h3>
                 <p class="card-subtitle mb-2 text-muted">Ending at: ${post.endDate}</p>
                 <div class="card-body">
                 </div>
-              </div>
-        </a>
+            </div>
+        </div>
     </core:forEach>
+    </div>
 </div>
-
     
