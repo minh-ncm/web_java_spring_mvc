@@ -24,6 +24,7 @@
     <p class="h2">${post.title}</p> 
     <p class="text-muted">Ending at: ${post.endDate}</p>
     <a href="edit/">Edit post</a>
+    <a href="bid/">Bid details</a>
     <p>${post.description}</p>
 </div>
 <div>

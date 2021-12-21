@@ -4,6 +4,13 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Bid;
 import org.springframework.stereotype.Repository;
@@ -27,5 +34,21 @@ public class BidRepositoryImplement implements BidRepository{
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         session.save(bid);
     }
+
+    @Override
+    public List<Bid> getBidList(int postId) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Bid> criteriaQuery = builder.createQuery(Bid.class);
+        Root<Bid> bidRoot = criteriaQuery.from(Bid.class);
+        criteriaQuery.where(builder.equal(bidRoot.get("post"), postId));
+        List<Order> orderList = new ArrayList<>();
+        orderList.add(builder.desc(bidRoot.get("amount")));
+        orderList.add(builder.asc(bidRoot.get("createdDate")));
+        criteriaQuery.orderBy(orderList);
+        Query query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
+    
     
 }

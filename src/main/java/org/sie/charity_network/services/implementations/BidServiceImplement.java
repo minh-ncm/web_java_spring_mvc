@@ -5,6 +5,7 @@
 package org.sie.charity_network.services.implementations;
 
 import java.util.Date;
+import java.util.List;
 import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.services.BidService;
 import org.sie.charity_network.repositories.BidRepository;
@@ -25,5 +26,11 @@ public class BidServiceImplement implements BidService{
         bid.setCreatedDate(new Date());
         bidRepository.addBid(bid);
     }
+
+    @Override
+    public List<Bid> getBidList(int postId) {
+        return bidRepository.getBidList(postId);
+    }
+ 
     
 }

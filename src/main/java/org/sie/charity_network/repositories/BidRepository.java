@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.repositories;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.Bid;
 
 /**
@@ -12,4 +13,5 @@ import org.sie.charity_network.POJOs.Bid;
  */
 public interface BidRepository {
     void addBid(Bid bid);
+    List<Bid> getBidList(int postId);
 }

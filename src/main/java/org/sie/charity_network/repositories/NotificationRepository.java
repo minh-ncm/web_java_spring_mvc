@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.repositories;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.Notification;
 
 /**
@@ -12,4 +13,5 @@ import org.sie.charity_network.POJOs.Notification;
  */
 public interface NotificationRepository {
     void addNotification(Notification notification);
+    List<Notification> getNotificationList(int userId);
 }
