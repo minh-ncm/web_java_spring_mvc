@@ -27,7 +27,7 @@
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">See all notifications</a></li>
+            <li><a class="dropdown-item" href="<core:url value="/1/notification/"/>">See all notifications</a></li>
           </ul>
         </li>
         <li class="nav-item">

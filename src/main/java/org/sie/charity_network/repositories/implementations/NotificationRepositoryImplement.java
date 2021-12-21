@@ -4,6 +4,11 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Notification;
 import org.sie.charity_network.repositories.NotificationRepository;
@@ -27,4 +32,18 @@ public class NotificationRepositoryImplement implements NotificationRepository{
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         session.save(notification);
     }
+
+    @Override
+    public List<Notification> getNotificationList(int userId) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Notification> criteriaQuery = builder.createQuery(Notification.class);
+        Root<Notification> notiRoot = criteriaQuery.from(Notification.class);
+        criteriaQuery.where(builder.equal(notiRoot.get("user"), userId));
+        criteriaQuery.orderBy(builder.desc(notiRoot.get("createdDate")));
+        Query query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
+    
+    
 }

@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.services;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
@@ -17,4 +18,5 @@ public interface NotificationService {
     void addNotification(Comment comment);
     void addNotification(Like like);
     void addNotification(Bid bid);
+    List<Notification> getNotificationList(int postId);
 }

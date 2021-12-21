@@ -5,6 +5,7 @@
 package org.sie.charity_network.services.implementations;
 
 import java.util.Date;
+import java.util.List;
 import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
@@ -54,6 +55,11 @@ public class NotificationServiceImplement implements NotificationService{
         notification.setUser(bid.getUser());
         notification.setPost(bid.getPost());
         notificationRepository.addNotification(notification);
+    }
+
+    @Override
+    public List<Notification> getNotificationList(int postId) {
+        return notificationRepository.getNotificationList(postId);
     }
     
     
