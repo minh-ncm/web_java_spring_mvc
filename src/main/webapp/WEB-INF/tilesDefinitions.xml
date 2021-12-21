@@ -35,4 +35,8 @@
         <put-attribute name="title" value="Post edit page" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/postEdit.jsp" />
     </definition>
+    <definition name="postBidList" extends="baseLayout">
+        <put-attribute name="title" value="Post's bid list" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/postBidList.jsp" />
+    </definition>
 </tiles-definitions>
