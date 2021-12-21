@@ -16,12 +16,10 @@
     <div class="row mb-3">
         <label for="username" class="form-label">Username</label>
         <form:input path="username" type="text" cssClass="form-control" id="username"/>
-        <form:errors path="username" element="p" cssClass="text text-danger"/>
     </div>
     <div class="row mb-3">
         <label for="password" class="form-label">Password</label>
         <form:input path="password" type="password" cssClass="form-control" id="password"/>
-        <form:errors path="password" element="p" cssClass="text text-danger"/>
     </div>
     <div class="row mb-3">
         <label for="imageFile" class="form-label">Upload your avatar image</label>

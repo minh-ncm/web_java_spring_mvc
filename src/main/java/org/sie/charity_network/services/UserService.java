@@ -5,12 +5,14 @@
 package org.sie.charity_network.services;
 
 import org.sie.charity_network.POJOs.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  *
  * @author sie
  */
-public interface UserService {
-    void addUser(User user);
+public interface UserService extends UserDetailsService{
+    boolean addUser(User user);
     User getUser(int id);
+    User getUser(String username);
 }

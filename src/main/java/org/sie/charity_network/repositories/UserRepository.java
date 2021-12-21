@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.repositories;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.User;
 
 /**
@@ -11,6 +12,7 @@ import org.sie.charity_network.POJOs.User;
  * @author sie
  */
 public interface UserRepository {
-    void addUser(User user);
+    boolean addUser(User user);
     User getUser(int id);
+    User getUser(String username);
 }

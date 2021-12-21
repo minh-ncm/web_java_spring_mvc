@@ -33,7 +33,7 @@ CREATE TABLE `bids` (
   KEY `fk_bids_users_user_id_idx` (`user_id`),
   CONSTRAINT `fk_bids_posts_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_bids_users_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `bids` (
 
 LOCK TABLES `bids` WRITE;
 /*!40000 ALTER TABLE `bids` DISABLE KEYS */;
+INSERT INTO `bids` VALUES (1,150.00,'2021-12-21 09:46:44',1,1),(2,150.01,'2021-12-21 09:46:52',1,1),(3,149.99,'2021-12-21 09:47:15',1,1),(4,150.00,'2021-12-21 09:54:34',1,1);
 /*!40000 ALTER TABLE `bids` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +64,7 @@ CREATE TABLE `comments` (
   KEY `fk_comment_post_post_id_idx` (`post_id`),
   CONSTRAINT `fk_comment_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_comment_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +73,7 @@ CREATE TABLE `comments` (
 
 LOCK TABLES `comments` WRITE;
 /*!40000 ALTER TABLE `comments` DISABLE KEYS */;
+INSERT INTO `comments` VALUES (1,'comment1',1,5,'2021-12-21 10:11:38'),(2,'comment2',1,5,'2021-12-21 10:11:44');
 /*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +94,7 @@ CREATE TABLE `likes` (
   KEY `fk_like_user_user_id_idx` (`user_id`),
   CONSTRAINT `fk_like_post_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_like_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,6 +103,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (1,1,2,'2021-12-21 10:11:26'),(2,1,1,'2021-12-21 10:11:28');
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +134,7 @@ CREATE TABLE `notifications` (
   CONSTRAINT `fk_notification_post_post_Id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `fk_notification_user_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_notifications_bid_bid_id` FOREIGN KEY (`bid_id`) REFERENCES `bids` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,6 +143,7 @@ CREATE TABLE `notifications` (
 
 LOCK TABLES `notifications` WRITE;
 /*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (1,1,1,'2021-12-21 09:46:44',0,NULL,NULL,1),(2,1,1,'2021-12-21 09:46:53',0,NULL,NULL,2),(3,1,1,'2021-12-21 09:47:15',0,NULL,NULL,3),(4,1,1,'2021-12-21 09:54:34',0,NULL,NULL,4),(5,2,1,'2021-12-21 10:11:26',0,NULL,1,NULL),(6,1,1,'2021-12-21 10:11:28',0,NULL,2,NULL),(7,5,1,'2021-12-21 10:11:38',0,1,NULL,NULL),(8,5,1,'2021-12-21 10:11:44',0,2,NULL,NULL);
 /*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,13 +219,13 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `user_role` varchar(50) NOT NULL,
   `is_reported` tinyint(1) DEFAULT NULL,
   `created_date` datetime NOT NULL,
   `avatar_url` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +234,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'user1','afdasdfasfasfdasd',0,0,'2021-12-21 00:45:33','http://res.cloudinary.com/dqrcn7ljx/image/upload/v1640022334/dxzxe8m41lurzwtnlapl.jpg'),(2,'user2','sdfgsdfgsdfgsdfgsdfg',0,0,'2021-12-21 00:45:53','http://res.cloudinary.com/dqrcn7ljx/image/upload/v1640022353/izlyxapgtxbc9itnljuo.jpg');
+INSERT INTO `users` VALUES (1,'user1','afdasdfasfasfdasd','0',0,'2021-12-21 00:45:33','http://res.cloudinary.com/dqrcn7ljx/image/upload/v1640022334/dxzxe8m41lurzwtnlapl.jpg'),(2,'user2','sdfgsdfgsdfgsdfgsdfg','0',0,'2021-12-21 00:45:53','http://res.cloudinary.com/dqrcn7ljx/image/upload/v1640022353/izlyxapgtxbc9itnljuo.jpg'),(3,'user3','12345678','ROLE_USER',0,'2021-12-21 19:52:03','http://res.cloudinary.com/dqrcn7ljx/image/upload/v1640091123/wnvgtikn8e0htn1cqnnz.jpg'),(4,'user4','$2a$10$fGyVzCJbDTxIQNZvV/JtcOnNBKwlcT/WhWE8KRQVpO0GU9L2DSeQ.','ROLE_USER',0,'2021-12-21 21:25:49','http://res.cloudinary.com/dqrcn7ljx/image/upload/v1640096750/byw7bb47u4edb5fndm8j.jpg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -243,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-21  1:20:33
+-- Dump completed on 2021-12-21 21:32:36

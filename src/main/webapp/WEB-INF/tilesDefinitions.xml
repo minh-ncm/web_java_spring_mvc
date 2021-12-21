@@ -43,4 +43,8 @@
         <put-attribute name="title" value="User's notification list" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/userNotificationList.jsp" />
     </definition>
+    <definition name="userLogin" extends="baseLayout">
+        <put-attribute name="title" value="Login page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/userLogin.jsp" />
+    </definition>
 </tiles-definitions>

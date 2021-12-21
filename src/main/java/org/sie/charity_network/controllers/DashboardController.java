@@ -5,6 +5,7 @@
 package org.sie.charity_network.controllers;
 
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
@@ -29,7 +30,7 @@ public class DashboardController {
     private UserService userService;
     
     @GetMapping("/")
-    public String render(@RequestParam(required = false) Map<String, String> params, Model model) {
+    public String render(@RequestParam(required = false) Map<String, String> params, Model model, HttpSession session) {
         int maxResult = 2;
         int currentPage = Integer.parseInt(params.getOrDefault("currentPage", "1"));
         double maxPage = Math.ceil(postService.getPostAmount().intValue() / (double)maxResult);
@@ -41,6 +42,7 @@ public class DashboardController {
         model.addAttribute("like", new Like());
         model.addAttribute("comment", new Comment());
         model.addAttribute("bid", new Bid());
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
         return "dashboard";
     }
 }

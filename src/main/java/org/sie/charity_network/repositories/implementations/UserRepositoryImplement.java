@@ -27,9 +27,15 @@ public class UserRepositoryImplement implements UserRepository{
     private LocalSessionFactoryBean localSessionFactoryBean;
 
     @Override
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
-        session.save(user);
+        try {
+            session.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -43,4 +49,16 @@ public class UserRepositoryImplement implements UserRepository{
         return (User) query.getSingleResult();
     }
 
+    @Override
+    public User getUser(String username) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery  = builder.createQuery(User.class);
+        Root<User> userRoot = criteriaQuery.from(User.class);
+        criteriaQuery.where(builder.equal(userRoot.get("username"), username));
+        Query query = session.createQuery(criteriaQuery);
+        return (User) query.getSingleResult();
+    }
+
+    
 }

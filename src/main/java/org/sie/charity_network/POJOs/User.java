@@ -28,17 +28,18 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "users")
 public class User implements Serializable{
+    public static final String ADMIN = "ROLE_ADMIN";
+    public static final String USER = "ROLE_USER";
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Size(min=4, max=20, message="{user.username.size}")
     private String username;
-    @Size(min=8, max=30, message="{user.password.size}")
     private String password;
     @Column(name = "avatar_url")
     private String avatarUrl;
-    @Column(name = "is_admin")
-    private Boolean isAdmin;
+    @Column(name = "user_role")
+    private String userRole;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
@@ -118,20 +119,6 @@ public class User implements Serializable{
      */
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
-    }
-
-    /**
-     * @return the isAdmin
-     */
-    public Boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-    /**
-     * @param isAdmin the isAdmin to set
-     */
-    public void setIsAdmin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
     }
 
     /**
@@ -272,6 +259,20 @@ public class User implements Serializable{
      */
     public void setReportByList(List<Report> reportByList) {
         this.reportByList = reportByList;
+    }
+
+    /**
+     * @return the userRole
+     */
+    public String getUserRole() {
+        return userRole;
+    }
+
+    /**
+     * @param userRole the userRole to set
+     */
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
     
     
