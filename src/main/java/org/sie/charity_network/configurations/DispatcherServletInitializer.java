@@ -23,6 +23,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
             WebAppContextConfig.class,
             HibernateConfigurations.class,
             TilesConfigurations.class,
+            SpringSecurityConfigurations.class,
         };
     }
 

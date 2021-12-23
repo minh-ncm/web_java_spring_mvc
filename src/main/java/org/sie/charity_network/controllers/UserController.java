@@ -9,6 +9,7 @@ import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,17 +28,31 @@ public class UserController {
     @Autowired
     private Environment environment;
     
-    @GetMapping("/user/create/")
+    @GetMapping("/user/register/")
     public String render(Model model){
         model.addAttribute("user", new User());
         return "userRegistration";
     }
     
-    @PostMapping("/user/create/")
-    public String create(@ModelAttribute("user") @Valid  User user, BindingResult bindingResult){
-        if(bindingResult.hasErrors())
-            return "userRegistration";
+    @PostMapping("/user/register/")
+    public String create(@ModelAttribute("user")User user){
         userService.addUser(user);
-        return "redirect:"+environment.getProperty("url.dashboard");
+        return "redirect:"+environment.getProperty("url.user.login");
+    }
+    
+    @GetMapping("/user/login/")
+    public String login() {
+        return "userLogin";
+    }
+    
+    @GetMapping("/user/loggedOut/")
+    public String logout() {
+        return "userLoggedOut";
+    }
+    
+    
+    @GetMapping("/accessDenied/")
+    public String renderAccessDenied(){
+        return "accessDenied";
     }
 }

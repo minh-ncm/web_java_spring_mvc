@@ -4,13 +4,16 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
-import org.sie.charity_network.POJOs.User;
-import org.sie.charity_network.repositories.UserRepository;
+import org.sie.charity_network.POJOs.Tag;
+import org.sie.charity_network.repositories.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -22,15 +25,15 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class UserRepositoryImplement implements UserRepository{
+public class TagRepositoryImplement implements TagRepository{
     @Autowired
     private LocalSessionFactoryBean localSessionFactoryBean;
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addTag(Tag tag) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         try {
-            session.save(user);
+            session.save(tag);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -39,26 +42,24 @@ public class UserRepositoryImplement implements UserRepository{
     }
 
     @Override
-    public User getUser(int id) {
+    public List<Tag> getTagList() {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery  = builder.createQuery(User.class);
-        Root<User> userRoot = criteriaQuery.from(User.class);
-        criteriaQuery.where(builder.equal(userRoot.get("id").as(Integer.class), id));
+        CriteriaQuery<Tag> criteriaQuery = builder.createQuery(Tag.class);
+        Root<Tag> tagRoot = criteriaQuery.from(Tag.class);
         Query query = session.createQuery(criteriaQuery);
-        return (User) query.getSingleResult();
+        return query.getResultList();
     }
 
     @Override
-    public User getUser(String username) {
+    public List<Tag> getTagList(String keyword) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<User> criteriaQuery  = builder.createQuery(User.class);
-        Root<User> userRoot = criteriaQuery.from(User.class);
-        criteriaQuery.where(builder.equal(userRoot.get("username"), username));
+        CriteriaQuery<Tag> criteriaQuery = builder.createQuery(Tag.class);
+        Root<Tag> tagRoot = criteriaQuery.from(Tag.class);
+        criteriaQuery.where(builder.like(tagRoot.get("type").as(String.class), String.format("%%%s%%", keyword)));
         Query query = session.createQuery(criteriaQuery);
-        return (User) query.getSingleResult();
+        return query.getResultList();
     }
-
     
 }

@@ -43,4 +43,24 @@
         <put-attribute name="title" value="User's notification list" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/userNotificationList.jsp" />
     </definition>
+    <definition name="userLogin" extends="baseLayout">
+        <put-attribute name="title" value="Login page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/userLogin.jsp" />
+    </definition>
+    <definition name="userLoggedOut" extends="baseLayout">
+        <put-attribute name="title" value="Payment page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/userLoggedOut.jsp" />
+    </definition>
+    <definition name="accessDenied" extends="baseLayout">
+        <put-attribute name="title" value="Permission denied" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/accessDenied.jsp" />
+    </definition>
+    <definition name="tagCreation" extends="baseLayout">
+        <put-attribute name="title" value="Tag Creation page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/tagCreation.jsp" />
+    </definition>
+    <definition name="momoPayment" extends="baseLayout">
+        <put-attribute name="title" value="Payment page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/momoPayment.jsp" />
+    </definition>
 </tiles-definitions>

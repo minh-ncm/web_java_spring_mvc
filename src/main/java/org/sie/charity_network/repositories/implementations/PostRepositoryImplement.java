@@ -6,13 +6,20 @@ package org.sie.charity_network.repositories.implementations;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Post;
+import org.sie.charity_network.POJOs.Post_;
+import org.sie.charity_network.POJOs.Tag;
 import org.sie.charity_network.repositories.CommentRepository;
 import org.sie.charity_network.repositories.LikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,14 +85,20 @@ public class PostRepositoryImplement implements PostRepository{
     }
 
     @Override
-    public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate) {
+    public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate, List<Tag> tagList) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Post> criteriaQuery = builder.createQuery(Post.class);
         Root<Post> postRoot = criteriaQuery.from(Post.class);
-        criteriaQuery.where(builder.between(postRoot.get("createdDate").as(Date.class), afterDate, beforeDate));
+        Predicate p1 = builder.between(postRoot.get("createdDate").as(Date.class), afterDate, beforeDate);
+        if (tagList != null) {
+            Predicate p2 = postRoot.join(Post_.tagList).in(tagList);
+            criteriaQuery.where(builder.and(p1, p2));
+        } else {
+            criteriaQuery.where(p1);
+        }
         Query query = session.createQuery(criteriaQuery);
-        List<Post> postList = query.getResultList();
+        Set<Post> postList = new HashSet<>(query.getResultList());
 
         List<Object[]> result = new ArrayList<>();
         for(Post post : postList) {
@@ -99,7 +112,6 @@ public class PostRepositoryImplement implements PostRepository{
             };
             result.add(objectList);
         }
-        
         return result;
     }
 

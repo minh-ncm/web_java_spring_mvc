@@ -14,9 +14,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.sie.charity_network.POJOs.Post;
+import org.sie.charity_network.POJOs.Tag;
 import org.springframework.stereotype.Service;
 import org.sie.charity_network.services.PostService;
 import org.sie.charity_network.repositories.PostRepository;
+import org.sie.charity_network.services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -29,6 +31,8 @@ public class PostServiceImplement implements PostService{
     private Cloudinary cloudinary;
     @Autowired
     private PostRepository postRepository;
+    @Autowired
+    private TagService tagService;
 
     @Override
     public void addPost(Post post) {
@@ -61,8 +65,11 @@ public class PostServiceImplement implements PostService{
     }
 
     @Override
-    public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate) {
-        return postRepository.getPostStatistic(afterDate, beforeDate);
+    public List<Object[]> getPostStatistic(Date afterDate, Date beforeDate, String keyword) {
+        List<Tag> tagList = null;
+        if (!keyword.isBlank())
+            tagList = tagService.getTagList(keyword);
+        return postRepository.getPostStatistic(afterDate, beforeDate, tagList);
     }
 
     @Override
@@ -87,6 +94,6 @@ public class PostServiceImplement implements PostService{
         }
         return postRepository.deletePost(post);
     }
-    
+
     
 }

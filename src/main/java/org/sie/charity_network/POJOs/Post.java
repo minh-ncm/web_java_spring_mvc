@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -60,6 +62,13 @@ public class Post implements Serializable{
     private List<Comment> commentList;
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Bid> bidList;
+    @ManyToMany()
+    @JoinTable(
+            name = "post_tags",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")}
+    )
+    private List<Tag> tagList;
     @Transient
     private MultipartFile imageFile;
 
@@ -232,6 +241,20 @@ public class Post implements Serializable{
      */
     public void setImageFile(MultipartFile imageFile) {
         this.imageFile = imageFile;
+    }
+
+    /**
+     * @return the tagList
+     */
+    public List<Tag> getTagList() {
+        return tagList;
+    }
+
+    /**
+     * @param tagList the tagList to set
+     */
+    public void setTagList(List<Tag> tagList) {
+        this.tagList = tagList;
     }
     
     

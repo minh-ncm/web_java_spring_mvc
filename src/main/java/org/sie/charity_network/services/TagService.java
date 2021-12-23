@@ -4,15 +4,15 @@
  */
 package org.sie.charity_network.services;
 
-import org.sie.charity_network.POJOs.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import java.util.List;
+import org.sie.charity_network.POJOs.Tag;
 
 /**
  *
  * @author sie
  */
-public interface UserService extends UserDetailsService{
-    boolean addUser(User user);
-    User getUser(int id);
-    User getUser(String username);
+public interface TagService {
+    boolean addTag(Tag tag);
+    List<Tag> getTagList();
+    List<Tag> getTagList(String keyword);
 }

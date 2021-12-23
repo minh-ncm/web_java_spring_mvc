@@ -5,14 +5,14 @@
 package org.sie.charity_network.repositories;
 
 import java.util.List;
-import org.sie.charity_network.POJOs.User;
+import org.sie.charity_network.POJOs.Tag;
 
 /**
  *
  * @author sie
  */
-public interface UserRepository {
-    boolean addUser(User user);
-    User getUser(int id);
-    User getUser(String username);
+public interface TagRepository {
+    boolean addTag(Tag tag);
+    List<Tag> getTagList();
+    List<Tag> getTagList(String keyword);
 }
