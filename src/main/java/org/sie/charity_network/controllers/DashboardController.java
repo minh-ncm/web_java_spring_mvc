@@ -36,7 +36,7 @@ public class DashboardController {
         double maxPage = Math.ceil(postService.getPostAmount().intValue() / (double)maxResult);
         
         model.addAttribute("postList", postService.getPost(currentPage, maxResult));
-        model.addAttribute("user", userService.getUser(1)); // remove when have authentication
+//        model.addAttribute("user", userService.getUser(1)); // remove when have authentication
         model.addAttribute("maxPage", maxPage);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("like", new Like());

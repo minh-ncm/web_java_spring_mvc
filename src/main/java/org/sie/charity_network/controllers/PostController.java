@@ -5,13 +5,18 @@
 package org.sie.charity_network.controllers;
 
 import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Post;
+import org.sie.charity_network.POJOs.Tag;
+import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.CommentService;
 import org.sie.charity_network.services.PostService;
+import org.sie.charity_network.services.TagService;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -37,27 +42,32 @@ public class PostController {
     private UserService userService;
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private TagService tagService;
     
     @GetMapping("/post/create/")
     public String render(Model model) {
-        model.addAttribute("post", new Post());
+        Post post = new Post();
+        List<Tag> tagList = tagService.getTagList();
+        post.setTagList(tagList);
+        model.addAttribute("post", post);
+        model.addAttribute("tagList", tagList);
         return "postCreation";
     }
     
     @PostMapping("/post/create/")
-    public String submit(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult){
+    public String submit(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult, HttpSession httpSession){
         
         if(bindingResult.hasErrors())
             return "postCreation";
         post.setEndDate(new Date());
-        post.setOwner(userService.getUser(1));
+        post.setOwner((User) httpSession.getAttribute("currentUser"));
         postService.addPost(post);
         return String.format("redirect:/post/%d/", post.getId());
     }
     
     @GetMapping("/post/{id}/")
     public String renderPostDetail(@PathVariable String id, Model model) {
-        model.addAttribute("user", userService.getUser(1)); // remove when have authentication
         Post post = postService.getPost(Integer.parseInt(id));
         model.addAttribute("post", post);
         model.addAttribute("commentList", commentService.getCommentList(post));

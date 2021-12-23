@@ -69,7 +69,7 @@ public class UserServiceImplement implements UserService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.getUser(username);
-        if (user != null) {
+        if (user == null) {
             throw new UsernameNotFoundException("User does not exist");
         }
         Set<GrantedAuthority> auth = new HashSet<>();

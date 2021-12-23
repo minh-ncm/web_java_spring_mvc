@@ -23,16 +23,15 @@
     <img src="${post.imageUrl}" class="img-fluid" alt="${post.title}">
     <p class="h2">${post.title}</p> 
     <p class="text-muted">Ending at: ${post.endDate}</p>
-    <a href="edit/">Edit post</a>
-    <a href="bid/">Bid details</a>
+    <core:if test="${post.owner.id == sessionScope.currentUser.id}">
+        <a href="edit/">Edit post</a>
+        <a href="bid/">Bid details</a>
+    </core:if>
     <p>${post.description}</p>
 </div>
 <div>
     <div class="btn-group">
         <form:form method="post" modelAttribute="like" action="${likeCreateUrl}" cssClass="likeHiddenForm">
-                      <form:select path="user" id="user" cssStyle="display:none;">
-                          <option value="${user.id}"></option>
-                      </form:select>
                       <form:select path="post" id="post" cssStyle="display:none;">
                           <option value="${post.id}">${post.id}</option>
                       </form:select>
@@ -43,9 +42,6 @@
     </div>
     <div class="collapse" id="commentForm">
         <form:form method="post" modelAttribute="comment" action="${commentCreateUrl}" onsubmit="return validateComment();">
-            <form:select path="user" id="user" cssStyle="display:none;">
-                <option value="${user.id}"></option>
-            </form:select>
             <form:select path="post" id="post" cssStyle="display:none;">
                 <option value="${post.id}">${post.id}</option>
             </form:select>
@@ -57,9 +53,6 @@
           
     <div class="collapse" id="bidForm">
         <form:form method="post" modelAttribute="bid" action="${bidCreateUrl}" onsubmit="return validateBid();">
-            <form:select path="user" id="user" cssStyle="display:none;">
-                <option value="${user.id}"></option>
-            </form:select>
             <form:select path="post" id="post" cssStyle="display:none;">
                 <option value="${post.id}">${post.id}</option>
             </form:select>

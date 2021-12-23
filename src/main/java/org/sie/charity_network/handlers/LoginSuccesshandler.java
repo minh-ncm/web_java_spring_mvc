@@ -29,7 +29,7 @@ public class LoginSuccesshandler implements AuthenticationSuccessHandler{
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication a) throws IOException, ServletException {
         User user = userService.getUser(a.getName());
         request.getSession().setAttribute("currentUser", user);
-        response.sendRedirect("/");
+        response.sendRedirect("/charity_network/");
     }
 
 

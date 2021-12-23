@@ -4,11 +4,13 @@
  */
 package org.sie.charity_network.controllers;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Notification;
+import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.CommentService;
 import org.sie.charity_network.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,8 @@ public class CommentController {
     private NotificationService notificationService;
     
     @PostMapping("/comment/create/")
-    String create(@ModelAttribute("comment")Comment comment) {
+    String create(@ModelAttribute("comment")Comment comment, HttpSession httpSession) {
+        comment.setUser((User) httpSession.getAttribute("currentUser"));
         commentService.addComment(comment);
         notificationService.addNotification(comment);
         return String.format("redirect:/post/%d/", comment.getPost().getId());

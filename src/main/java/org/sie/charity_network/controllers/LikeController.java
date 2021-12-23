@@ -5,8 +5,10 @@
 package org.sie.charity_network.controllers;
 
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Notification;
+import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.LikeService;
 import org.sie.charity_network.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,8 @@ public class LikeController {
     private NotificationService notificationService;
     
     @PostMapping("like/create/")
-    String create(@ModelAttribute("like") Like like, Model model) {
+    String create(@ModelAttribute("like") Like like, Model model, HttpSession httpSession) {
+        like.setUser((User) httpSession.getAttribute("currentUser"));
         likeService.addLike(like);
         notificationService.addNotification(like);
         return "redirect:"+environment.getProperty("url.dashboard");

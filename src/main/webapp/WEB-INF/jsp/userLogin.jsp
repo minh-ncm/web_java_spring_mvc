@@ -10,7 +10,7 @@
 <core:if test="${param.error != null}">
     <p class="alert alert-danger">Log in failed, please try again.</p>
 </core:if>
-<form class="form-group">
+<form class="form-group" method="post">
     <label for="username">username</label>
     <input type="text" id="username", name="username" class="form-control"/>
     <label for="password">password</label>

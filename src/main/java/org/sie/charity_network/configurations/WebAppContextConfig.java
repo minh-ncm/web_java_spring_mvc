@@ -60,6 +60,7 @@ public class WebAppContextConfig implements WebMvcConfigurer{
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new UserFormatter());
         registry.addFormatter(new PostFormatter());
+        registry.addFormatter(new TagFormatter());
     }
 
     @Bean

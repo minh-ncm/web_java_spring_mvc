@@ -5,11 +5,13 @@
 package org.sie.charity_network.controllers;
 
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.sie.charity_network.POJOs.Bid;
 import org.sie.charity_network.POJOs.Comment;
 import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Notification;
+import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.BidService;
 import org.sie.charity_network.services.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,8 @@ public class BidController {
     private NotificationService notificationService;
     
     @PostMapping("/bid/create/")
-    public String create(@ModelAttribute("bid")Bid bid){
+    public String create(@ModelAttribute("bid")Bid bid, HttpSession httpSession){
+        bid.setUser((User) httpSession.getAttribute("currentUser"));
         bidService.addBid(bid);
         notificationService.addNotification(bid);
         return "redirect:"+environment.getProperty("url.dashboard");

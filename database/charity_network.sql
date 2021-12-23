@@ -148,6 +148,34 @@ INSERT INTO `notifications` VALUES (1,1,1,'2021-12-21 09:46:44',0,NULL,NULL,1),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `post_tags`
+--
+
+DROP TABLE IF EXISTS `post_tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `post_tags` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `post_id` int NOT NULL,
+  `tag_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `post_tags_posts_post_id_idx` (`post_id`),
+  KEY `post_tags_tags_tag_id_idx` (`tag_id`),
+  CONSTRAINT `post_tags_posts_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
+  CONSTRAINT `post_tags_tags_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_tags`
+--
+
+LOCK TABLES `post_tags` WRITE;
+/*!40000 ALTER TABLE `post_tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `post_tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `posts`
 --
 
@@ -210,6 +238,29 @@ LOCK TABLES `reports` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tags`
+--
+
+DROP TABLE IF EXISTS `tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tags` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tags`
+--
+
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -247,4 +298,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-21 21:32:36
+-- Dump completed on 2021-12-22 14:45:03

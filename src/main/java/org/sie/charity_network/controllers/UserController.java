@@ -9,6 +9,7 @@ import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,5 +43,16 @@ public class UserController {
     @GetMapping("/user/login/")
     public String login() {
         return "userLogin";
+    }
+    
+    @GetMapping("/user/loggedOut/")
+    public String logout() {
+        return "userLoggedOut";
+    }
+    
+    
+    @GetMapping("/accessDenied/")
+    public String renderAccessDenied(){
+        return "accessDenied";
     }
 }
