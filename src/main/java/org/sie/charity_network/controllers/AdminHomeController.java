@@ -33,6 +33,7 @@ public class AdminHomeController {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         String beforeDateStr = (String) params.get("beforeDate");
         String afterDateStr = (String) params.get("afterDate");
+        String tagKeywords = (String) params.getOrDefault("tagKeywords", "");
         Date beforeDate = new Date();
         Date afterDate = new Date(0L);
         try {
@@ -45,7 +46,7 @@ public class AdminHomeController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        model.addAttribute("postStatistic", postService.getPostStatistic(afterDate, beforeDate));
+        model.addAttribute("postStatistic", postService.getPostStatistic(afterDate, beforeDate, tagKeywords));
         return "adminHome";
     }
 }

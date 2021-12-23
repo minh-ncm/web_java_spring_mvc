@@ -4,10 +4,12 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.sie.charity_network.POJOs.Tag;
@@ -48,6 +50,16 @@ public class TagRepositoryImplement implements TagRepository{
         Query query = session.createQuery(criteriaQuery);
         return query.getResultList();
     }
-    
+
+    @Override
+    public List<Tag> getTagList(String keyword) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Tag> criteriaQuery = builder.createQuery(Tag.class);
+        Root<Tag> tagRoot = criteriaQuery.from(Tag.class);
+        criteriaQuery.where(builder.like(tagRoot.get("type").as(String.class), String.format("%%%s%%", keyword)));
+        Query query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
     
 }

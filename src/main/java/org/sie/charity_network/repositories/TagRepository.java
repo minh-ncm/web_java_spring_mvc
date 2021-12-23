@@ -14,4 +14,5 @@ import org.sie.charity_network.POJOs.Tag;
 public interface TagRepository {
     boolean addTag(Tag tag);
     List<Tag> getTagList();
+    List<Tag> getTagList(String keyword);
 }

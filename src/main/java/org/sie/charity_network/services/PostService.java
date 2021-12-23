@@ -7,6 +7,7 @@ package org.sie.charity_network.services;
 import java.util.Date;
 import java.util.List;
 import org.sie.charity_network.POJOs.Post;
+import org.sie.charity_network.POJOs.Tag;
 
 /**
  *
@@ -17,7 +18,7 @@ public interface PostService {
     List<Post> getPost(int page, int maxResult);
     Post getPost(int id);
     Long getPostAmount();
-    List<Object[]> getPostStatistic(Date afterDate, Date beforeDate);
+    List<Object[]> getPostStatistic(Date afterDate, Date beforeDate, String keyword);
     boolean updatePost(int postId, Post updatedPost);
     boolean deletePost(int postId);
 }

@@ -29,6 +29,11 @@ public class TagServiceImplement implements TagService{
     public List<Tag> getTagList() {
         return tagRepository.getTagList();
     }
+
+    @Override
+    public List<Tag> getTagList(String keyword) {
+        return tagRepository.getTagList(keyword);
+    }
     
     
 }

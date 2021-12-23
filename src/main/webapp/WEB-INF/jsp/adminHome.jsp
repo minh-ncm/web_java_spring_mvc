@@ -18,6 +18,10 @@
         <label for="beforeDate" class="h5 col-md-1">Before: </label>
         <input class="form-comtrol" type="datetime-local" name="beforeDate" id="beforeDate"/>
     </div>
+    <div class="row-md mb-3">
+        <label for="tagKeywords" class="h5 col-md-1">Tags: </label>
+        <input class="form-comtrol" type="text" name="tagKeywords" id="tagKeywords"/>
+    </div>
     <div class="row-md">
         <button class="btn btn-primary" type="submit">Filter</button>
     </div>
