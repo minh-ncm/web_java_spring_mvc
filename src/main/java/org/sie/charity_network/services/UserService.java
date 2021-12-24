@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.services;
 
+import java.util.List;
 import org.sie.charity_network.POJOs.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -15,4 +16,6 @@ public interface UserService extends UserDetailsService{
     boolean addUser(User user);
     User getUser(int id);
     User getUser(String username);
+    List<User> getUsersByKeyword(String keyword);
+    boolean updateUser(int userId, boolean isReported);
 }

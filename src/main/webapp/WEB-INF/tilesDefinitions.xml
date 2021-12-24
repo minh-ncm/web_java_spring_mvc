@@ -59,6 +59,10 @@
         <put-attribute name="title" value="Tag Creation page" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/tagCreation.jsp" />
     </definition>
+    <definition name="reportCreation" extends="baseLayout">
+        <put-attribute name="title" value="Report page" />
+        <put-attribute name="contentCenter" value="/WEB-INF/jsp/reportCreation.jsp" />
+    </definition>
     <definition name="momoPayment" extends="baseLayout">
         <put-attribute name="title" value="Payment page" />
         <put-attribute name="contentCenter" value="/WEB-INF/jsp/momoPayment.jsp" />
