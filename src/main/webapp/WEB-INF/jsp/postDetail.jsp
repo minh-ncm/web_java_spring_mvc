@@ -38,7 +38,11 @@
                           <button class="btn btn-primary" type="submit">Like</button>
         </form:form>
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#commentForm" aria-expanded="false" aria-controls="commentForm" >Comment</button>
-        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bidForm" aria-expanded="false" aria-controls="bidForm">Bid</button>
+        <core:if test="${sessionScope.currentUser.id != post.owner.id}">
+            <core:if test="${!isEnded}">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#bidForm" aria-expanded="false" aria-controls="bidForm">Bid</button>
+            </core:if>
+        </core:if>  
     </div>
     <div class="collapse" id="commentForm">
         <form:form method="post" modelAttribute="comment" action="${commentCreateUrl}" onsubmit="return validateComment();">
@@ -50,7 +54,6 @@
               <button class="btn btn-primary" type="submit">Create</button>
         </form:form>
       </div>
-          
     <div class="collapse" id="bidForm">
         <form:form method="post" modelAttribute="bid" action="${bidCreateUrl}" onsubmit="return validateBid();">
             <form:select path="post" id="post" cssStyle="display:none;">

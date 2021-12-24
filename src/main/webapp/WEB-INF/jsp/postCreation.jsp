@@ -13,9 +13,10 @@
 
 <spring:message code="url.tag.create" var="tagCreate"/>
 
+<script type="text/javascript" src="<core:url value="/js/postCreation.js"/>"></script>
 
 <h1>Post creation page</h1>
-<form:form modelAttribute="post" action="" method="post" enctype="multipart/form-data">
+<form:form modelAttribute="post" action="" method="post" enctype="multipart/form-data" onsubmit="return validatePostCreateForm();">
     <div class="row mb-3">
         <label for="title" class="form-label">title</label>
         <form:input path="title" type="text" cssClass="form-control" id="title"/>
@@ -29,7 +30,7 @@
     <div class="row mb-3">
         <label for="endDate" class="form-label">end date</label>
         <form:input path="endDate" type="datetime-local" cssClass="form-control" id="endDate"/>
-        <form:errors path="endDate" element="p" cssClass="text text-danger"/>
+        <p class="text text-danger" id="endDateError"></p>
     </div>
     <div class="row mb-3"
          
@@ -40,14 +41,12 @@
                 <form:checkbox path="tagList" value="${tag.id}" cssClass="form-checkbox-input" id="tag#${tag.id}"/>
             </core:forEach>
         </div>
-        <%--<form:checkboxes items="${tagList}" path="tagList" itemValue="id" itemLabel="type" id="tagListCheckboxes" cssClass="form-check-input"/>--%>
-        
-        <a href="<core:url value="${tagCreate}"/>">Create new tag</a>
+        <span><a href="<core:url value="${tagCreate}"/>">Create new tag</a></span>
     </div>
     <div class="row mb-3">
         <label for="imageFile" class="form-label">end date</label>
         <form:input path="imageFile" type="file" cssClass="form-control" id="imageFile"/>
-        <form:errors path="imageFile" element="p" cssClass="text text-danger"/>
+        <p class="text text-danger" id="imageFileError"></p>
     </div>
     <button class="btn btn-success" type="submit">Create</button>
 </form:form>

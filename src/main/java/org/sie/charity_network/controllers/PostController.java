@@ -74,10 +74,12 @@ public class PostController {
         model.addAttribute("comment", new Comment());
         model.addAttribute("bid", new Bid());
         model.addAttribute("like", new Like());
+        if (post.getEndDate().after(new Date()))
+            model.addAttribute("isEnded", true);
         return "postDetail";
     }
     
-    @GetMapping("/post/{postId}/edit/")
+    @GetMapping("/post/{postId}/update/")
     public String renderEditPage(@PathVariable String postId, Model model) {
         Post post = postService.getPost(Integer.parseInt(postId));
         model.addAttribute("post", post);
