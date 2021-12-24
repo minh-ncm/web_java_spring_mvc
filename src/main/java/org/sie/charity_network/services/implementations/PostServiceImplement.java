@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.POJOs.Tag;
+import org.sie.charity_network.POJOs.User;
 import org.springframework.stereotype.Service;
 import org.sie.charity_network.services.PostService;
 import org.sie.charity_network.repositories.PostRepository;
@@ -75,7 +76,16 @@ public class PostServiceImplement implements PostService{
     @Override
     public boolean updatePost(int postId, Post updatedPost) {
         Post post = postRepository.getPost(postId);
-        return postRepository.updatePost(post, updatedPost);
+        post.setTitle(updatedPost.getTitle());
+        post.setDescription(updatedPost.getDescription());
+        return postRepository.updatePost(post);
+    }
+
+    @Override
+    public boolean setWinner(int postId, User winner) {
+        Post post = postRepository.getPost(postId);
+        post.setWinner(winner);
+        return postRepository.updatePost(post);
     }
 
     @Override

@@ -14,6 +14,7 @@ import org.sie.charity_network.POJOs.Notification;
 import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.BidService;
 import org.sie.charity_network.services.NotificationService;
+import org.sie.charity_network.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,8 @@ public class BidController {
     @Autowired
     private BidService bidService;
     @Autowired
+    private PostService postService;
+    @Autowired
     private NotificationService notificationService;
     
     @PostMapping("/bid/create/")
@@ -48,6 +51,7 @@ public class BidController {
     @GetMapping("/post/{postId}/bid/")
     public String renderPostBidList(@PathVariable String postId, Model model) {
         model.addAttribute("bidList", bidService.getBidList(Integer.parseInt(postId)));
+        model.addAttribute("post", postService.getPost(Integer.parseInt(postId)));
         return "postBidList";
     }
 }

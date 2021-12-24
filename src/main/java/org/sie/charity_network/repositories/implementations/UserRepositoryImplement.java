@@ -10,6 +10,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import org.hibernate.Session;
+import org.sie.charity_network.POJOs.Bid;
+import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +86,5 @@ public class UserRepositoryImplement implements UserRepository{
         return true;
     }
 
-    
+
 }

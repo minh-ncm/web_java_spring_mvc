@@ -9,7 +9,7 @@
 <%@taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <h1>Post edit page</h1>
-<form:form modelAttribute="post" action="" method="post">
+<form:form modelAttribute="post" method="post">
     <div class="row mb-3">
         <label for="title" class="form-label">title</label>
         <form:input path="title" type="text" cssClass="form-control" id="title"/>

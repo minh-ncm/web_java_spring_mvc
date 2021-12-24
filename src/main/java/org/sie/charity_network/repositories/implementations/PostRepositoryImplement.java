@@ -114,12 +114,10 @@ public class PostRepositoryImplement implements PostRepository{
     }
 
     @Override
-    public boolean updatePost(Post post, Post updatedPost) {
+    public boolean updatePost(Post updatedPost) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
-        post.setTitle(updatedPost.getTitle());
-        post.setDescription(updatedPost.getDescription());
         try {
-            session.update(post);    
+            session.update(updatedPost);    
         } catch (Exception e) {
             e.printStackTrace();
             return false;

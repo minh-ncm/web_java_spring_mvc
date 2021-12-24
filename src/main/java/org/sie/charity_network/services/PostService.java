@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.POJOs.Tag;
+import org.sie.charity_network.POJOs.User;
 
 /**
  *
@@ -20,5 +21,6 @@ public interface PostService {
     Long getPostAmount();
     List<Object[]> getPostStatistic(Date afterDate, Date beforeDate, String keyword);
     boolean updatePost(int postId, Post updatedPost);
+    boolean setWinner(int postId, User winner);
     boolean deletePost(int postId);
 }

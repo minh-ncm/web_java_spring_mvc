@@ -19,6 +19,6 @@ public interface PostRepository {
     Post getPost(int id);
     Long getPostAmount();
     List<Object[]> getPostStatistic(Date afterDate, Date beforeDate, List<Tag> tagList);
-    boolean updatePost(Post post, Post updatedPost);
+    boolean updatePost(Post updatedPost);
     boolean deletePost(Post post);
 }

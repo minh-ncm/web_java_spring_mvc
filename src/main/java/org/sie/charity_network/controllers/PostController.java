@@ -84,7 +84,7 @@ public class PostController {
         return "postEdit";
     }
     
-    @PostMapping("/post/{postId}/edit/")
+    @PostMapping("/post/{postId}/update/")
     public String submitPostEdit(@ModelAttribute("post") @Valid Post post, BindingResult bindingResult, @PathVariable String postId) {
         if (bindingResult.hasErrors()) {
             return "postEdit";
@@ -93,12 +93,19 @@ public class PostController {
         return String.format("redirect:/post/%s/", postId);
     }
     
-    
     @PostMapping("/post/{postId}/delete/")
     public String deletePost(@ModelAttribute("post") Post post, @PathVariable String postId, Model model){
         if (postService.deletePost(Integer.parseInt(postId)))
             return String.format("redirect:%s", environment.getProperty("url.dashboard"));
         model.addAttribute("errors", "Something wrong. Can't delete post.");
         return "postEdit";
+    }
+    
+    @PostMapping("/post/{postId}/winner/")
+    public String setWinner(@ModelAttribute("post") Post post, @PathVariable String postId, Model model){
+        if (postService.setWinner(Integer.parseInt(postId), post.getWinner()))
+            return String.format("redirect:/post/%s/bid/", postId);
+        model.addAttribute("errors", "Cannot set winner. Try again");
+        return "postBidList";
     }
 }
