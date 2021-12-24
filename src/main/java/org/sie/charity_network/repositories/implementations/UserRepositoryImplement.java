@@ -4,6 +4,7 @@
  */
 package org.sie.charity_network.repositories.implementations;
 
+import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -58,6 +59,29 @@ public class UserRepositoryImplement implements UserRepository{
         criteriaQuery.where(builder.equal(userRoot.get("username"), username));
         Query query = session.createQuery(criteriaQuery);
         return (User) query.getSingleResult();
+    }
+
+    @Override
+    public List<User> getUsersByKeyword(String keyword) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery  = builder.createQuery(User.class);
+        Root<User> userRoot = criteriaQuery.from(User.class);
+        criteriaQuery.where(builder.like(userRoot.get("username").as(String.class), String.format("%%%s%%", keyword)));
+        Query query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        try {
+            session.update(user);   
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     

@@ -9,6 +9,7 @@ import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -76,6 +77,18 @@ public class UserServiceImplement implements UserService{
         auth.add(new SimpleGrantedAuthority(user.getUserRole()));
         return new org.springframework.security.core.userdetails
                 .User(user.getUsername(), user.getPassword(), auth);
+    }
+
+    @Override
+    public List<User> getUsersByKeyword(String keyword) {
+        return userRepository.getUsersByKeyword(keyword);
+    }
+
+    @Override
+    public boolean updateUser(int userId, boolean isReported) {
+        User user = userRepository.getUser(userId);
+        user.setIsReport(isReported);
+        return userRepository.updateUser(user);
     }
 
     

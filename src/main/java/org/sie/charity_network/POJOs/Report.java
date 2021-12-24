@@ -27,7 +27,7 @@ public class Report implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int reason;
+    private String reason;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private Date createdDate;
@@ -58,14 +58,14 @@ public class Report implements Serializable{
     /**
      * @return the reason
      */
-    public int getReason() {
+    public String getReason() {
         return reason;
     }
 
     /**
      * @param reason the reason to set
      */
-    public void setReason(int reason) {
+    public void setReason(String reason) {
         this.reason = reason;
     }
 

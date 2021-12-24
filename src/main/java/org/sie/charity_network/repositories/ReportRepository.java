@@ -4,17 +4,12 @@
  */
 package org.sie.charity_network.repositories;
 
-import java.util.List;
-import org.sie.charity_network.POJOs.User;
+import org.sie.charity_network.POJOs.Report;
 
 /**
  *
  * @author sie
  */
-public interface UserRepository {
-    boolean addUser(User user);
-    User getUser(int id);
-    User getUser(String username);
-    List<User> getUsersByKeyword(String keyword);
-    boolean updateUser(User user);
+public interface ReportRepository {
+    boolean addReport(Report report);
 }
