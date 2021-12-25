@@ -20,15 +20,20 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer{
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic");
-        registry.setApplicationDestinationPrefixes("/app");
+//        registry.enableSimpleBroker("/topic");
+//        registry.setApplicationDestinationPrefixes("/app");
+        
+        registry.enableSimpleBroker("/secured/user/queue/specific-user");
+        registry.setApplicationDestinationPrefixes("/spring-security-mvc-socket");
+        registry.setUserDestinationPrefix("/secured/user");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat");
-//        registry.addEndpoint("/charity_network/chat").withSockJS();
-        registry.addEndpoint("/chat").withSockJS();
+//        registry.addEndpoint("/chat");
+//        registry.addEndpoint("/chat").withSockJS();
+        
+        registry.addEndpoint("/secured/room").withSockJS();
     }
     
     

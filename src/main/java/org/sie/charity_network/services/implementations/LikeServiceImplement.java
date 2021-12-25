@@ -39,5 +39,10 @@ public class LikeServiceImplement implements LikeService{
         likeRepository.addLike(like);
     }
 
+    @Override
+    public Long getLikeAmount(int postId) {
+        return likeRepository.getLikeAmount(postId);
+    }
+
     
 }

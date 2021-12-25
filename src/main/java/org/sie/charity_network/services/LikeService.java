@@ -16,4 +16,5 @@ import org.sie.charity_network.POJOs.User;
 public interface LikeService {
     void addLike(Post post, User user);
     void addLike(Like like);
+    Long getLikeAmount(int postId);
 }

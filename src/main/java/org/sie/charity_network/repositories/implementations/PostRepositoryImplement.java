@@ -52,6 +52,7 @@ public class PostRepositoryImplement implements PostRepository{
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Post> criteriaQuery = builder.createQuery(Post.class);
         Root<Post> postRoot = criteriaQuery.from(Post.class);
+        criteriaQuery.orderBy(builder.desc(postRoot.get("createdDate")));
         Query query = session.createQuery(criteriaQuery);
         query.setMaxResults(maxResult);
         query.setFirstResult((page-1)*maxResult);
@@ -111,8 +112,8 @@ public class PostRepositoryImplement implements PostRepository{
 
         List<Object[]> result = new ArrayList<>();
         for(Post post : postList) {
-            Long likeAmount = likeRepository.getLikeAmount(post);
-            Long commentAmount = commentRepository.getCommentAmount(post);
+            Long likeAmount = likeRepository.getLikeAmount(post.getId());
+            Long commentAmount = commentRepository.getCommentAmount(post.getId());
             Object[] objectList = {
                 post.getId(),
                 post.getCreatedDate(),

@@ -4,6 +4,16 @@
  */
 package org.sie.charity_network.controllers;
 
+import com.mservice.allinone.models.CaptureMoMoResponse;
+import com.mservice.allinone.models.PayGateResponse;
+import com.mservice.allinone.processor.allinone.CaptureMoMo;
+import com.mservice.shared.sharedmodels.Environment;
+import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.MomoRequest;
 import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.services.PaymentService;
@@ -30,11 +40,25 @@ public class PaymentController {
     @Autowired
     private PostService postService;
     
-    @GetMapping("/test/")
-    public ResponseEntity<MomoRequest> test(){
-        MomoRequest momoRequest = paymentService.createRequest(postService.getPost(1));
+    @GetMapping("test/momo2/")
+    public String render(){
+        return "momo";
+    }
+    
+    @GetMapping("/test/momo/")
+    public ResponseEntity<CaptureMoMoResponse> test() throws Exception{
+        String orderId = "orderIdqwerqwerqwerq";
+        String requestId = "requestIdqerqwerqweqqwer";
+        String amount = String.valueOf(new BigDecimal(1e6));
+        String orderInfo = "orderInfoqerqwerqwerqwer";
+        String returnURL = "google.com";
+        String notifyURL = "google.com";
+        String extraData = "";
+        
+        Environment env = Environment.selectEnv("dev", Environment.ProcessType.PAY_GATE);
+        CaptureMoMoResponse response = CaptureMoMo.process(env, orderId, requestId, amount, orderInfo, returnURL, notifyURL, extraData);
         return new ResponseEntity<>(
-                momoRequest,
+                response,
                 HttpStatus.OK
         );
     }

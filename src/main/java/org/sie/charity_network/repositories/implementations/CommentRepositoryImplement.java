@@ -35,12 +35,12 @@ public class CommentRepositoryImplement implements CommentRepository{
     }
 
     @Override
-    public Long getCommentAmount(Post post) {
+    public Long getCommentAmount(int postId) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
         Root<Comment> commentRoot = criteriaQuery.from(Comment.class);
-        criteriaQuery.where(builder.equal(commentRoot.get("post"), post.getId()));
+        criteriaQuery.where(builder.equal(commentRoot.get("post"), postId));
         criteriaQuery.select(builder.count(commentRoot.get("id")));
         Query query = session.createQuery(criteriaQuery);
         return (Long) query.getSingleResult();

@@ -11,6 +11,7 @@ package org.sie.charity_network.POJOs;
 public class Message {
     private String from;
     private String text;
+    private String to;
 
     public Message() {
     }
@@ -41,6 +42,20 @@ public class Message {
      */
     public void setText(String text) {
         this.text = text;
+    }
+
+    /**
+     * @return the to
+     */
+    public String getTo() {
+        return to;
+    }
+
+    /**
+     * @param to the to to set
+     */
+    public void setTo(String to) {
+        this.to = to;
     }
     
     

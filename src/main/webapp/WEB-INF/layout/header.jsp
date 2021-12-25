@@ -15,6 +15,7 @@
 <spring:message code="url.user.login" var="userLoginUrl" />
 <spring:message code="url.user.logout" var="userLogoutUrl" />
 <spring:message code="url.post.create" var="postCreateUrl" />
+<spring:message code="url.report.create" var="userReportUrl" />
 
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container-fluid">
@@ -26,6 +27,9 @@
       <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" href="<core:url value="${postCreateUrl}"/>">create post</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<core:url value="${userReporturl}"/>">report user</a>
         </li>
         <security:authorize access="hasRole('ROLE_ADMIN')">
             <li class="nav-item">

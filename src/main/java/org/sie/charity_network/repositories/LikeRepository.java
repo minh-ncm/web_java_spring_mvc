@@ -14,5 +14,5 @@ import org.sie.charity_network.POJOs.Post;
  */
 public interface LikeRepository {
     void addLike(Like like);
-    Long getLikeAmount(Post post);
+    Long getLikeAmount(int postId);
 }

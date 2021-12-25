@@ -35,12 +35,12 @@ public class LikeRepositoryImplement implements LikeRepository{
     }
 
     @Override
-    public Long getLikeAmount(Post post) {
+    public Long getLikeAmount(int postId) {
         Session session = localSessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = builder.createQuery(Long.class);
         Root<Like> likeRoot = criteriaQuery.from(Like.class);
-        criteriaQuery.where(builder.equal(likeRoot.get("post"), post.getId()));
+        criteriaQuery.where(builder.equal(likeRoot.get("post"), postId));
         criteriaQuery.select(builder.count(likeRoot.get("id")));
         Query query = session.createQuery(criteriaQuery);
         return (Long) query.getSingleResult();

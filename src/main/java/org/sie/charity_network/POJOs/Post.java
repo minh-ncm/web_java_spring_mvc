@@ -70,6 +70,10 @@ public class Post implements Serializable{
     private List<Tag> tagList;
     @Transient
     private MultipartFile imageFile;
+    @Transient
+    private Long likeAmount;
+    @Transient
+    private Long CommentAmount;
 
     public Post() {
     }
@@ -254,6 +258,34 @@ public class Post implements Serializable{
      */
     public void setTagList(List<Tag> tagList) {
         this.tagList = tagList;
+    }
+
+    /**
+     * @return the likeAmount
+     */
+    public Long getLikeAmount() {
+        return likeAmount;
+    }
+
+    /**
+     * @param likeAmount the likeAmount to set
+     */
+    public void setLikeAmount(Long likeAmount) {
+        this.likeAmount = likeAmount;
+    }
+
+    /**
+     * @return the CommentAmount
+     */
+    public Long getCommentAmount() {
+        return CommentAmount;
+    }
+
+    /**
+     * @param CommentAmount the CommentAmount to set
+     */
+    public void setCommentAmount(Long CommentAmount) {
+        this.CommentAmount = CommentAmount;
     }
     
     

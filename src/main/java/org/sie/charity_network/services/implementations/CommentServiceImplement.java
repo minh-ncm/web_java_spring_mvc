@@ -29,8 +29,8 @@ public class CommentServiceImplement implements CommentService{
     }
 
     @Override
-    public Long getCommentAmount(Post post) {
-        return commentRepository.getCommentAmount(post);
+    public Long getCommentAmount(int postId) {
+        return commentRepository.getCommentAmount(postId);
     }
 
     @Override

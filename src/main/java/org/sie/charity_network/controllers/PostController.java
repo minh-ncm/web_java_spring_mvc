@@ -15,6 +15,7 @@ import org.sie.charity_network.POJOs.Post;
 import org.sie.charity_network.POJOs.Tag;
 import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.CommentService;
+import org.sie.charity_network.services.LikeService;
 import org.sie.charity_network.services.PostService;
 import org.sie.charity_network.services.TagService;
 import org.sie.charity_network.services.UserService;
@@ -43,6 +44,8 @@ public class PostController {
     @Autowired
     private CommentService commentService;
     @Autowired
+    private LikeService likeService;
+    @Autowired
     private TagService tagService;
     
     @GetMapping("/post/create/")
@@ -69,6 +72,8 @@ public class PostController {
     @GetMapping("/post/{id}/")
     public String renderPostDetail(@PathVariable String id, Model model) {
         Post post = postService.getPost(Integer.parseInt(id));
+        post.setLikeAmount(likeService.getLikeAmount(Integer.parseInt(id)));
+        post.setCommentAmount(commentService.getCommentAmount(Integer.parseInt(id)));
         model.addAttribute("post", post);
         model.addAttribute("commentList", commentService.getCommentList(post));
         model.addAttribute("comment", new Comment());

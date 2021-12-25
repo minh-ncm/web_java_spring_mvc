@@ -31,7 +31,7 @@ public class DashboardController {
     
     @GetMapping("/")
     public String render(@RequestParam(required = false) Map<String, String> params, Model model, HttpSession session) {
-        int maxResult = 2;
+        int maxResult = 30;
         int currentPage = Integer.parseInt(params.getOrDefault("currentPage", "1"));
         double maxPage = Math.ceil(postService.getPostAmount().intValue() / (double)maxResult);
         

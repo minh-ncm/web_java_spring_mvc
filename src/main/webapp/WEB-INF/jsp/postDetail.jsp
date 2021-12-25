@@ -27,6 +27,8 @@
         <a href="update/">Edit post</a>
         <a href="bid/">Bid details</a>
     </core:if>
+        <p>Likes: ${post.likeAmount} - Comments: ${post.commentAmount}</p>
+    <hr>
     <p>${post.description}</p>
 </div>
 <div>

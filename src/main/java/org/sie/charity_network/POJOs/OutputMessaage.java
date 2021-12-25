@@ -17,7 +17,7 @@ public class OutputMessaage {
     public OutputMessaage() {
     }
 
-    public OutputMessaage(String message, String from, String date) {
+    public OutputMessaage(String from, String message, String date) {
         this.text = message;
         this.from = from;
         this.time = date;

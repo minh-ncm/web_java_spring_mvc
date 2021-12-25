@@ -14,6 +14,6 @@ import org.sie.charity_network.POJOs.Post;
  */
 public interface CommentRepository {
     void addComment(Comment comment);
-    Long getCommentAmount(Post post);
+    Long getCommentAmount(int postId);
     List<Comment> getCommentList(Post post);
 }
