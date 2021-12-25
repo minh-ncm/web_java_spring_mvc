@@ -24,6 +24,7 @@
                 <div class="col"><tile:insertAttribute name="contentRight"/></div>
             </div>
         </div>
+        <div><tile:insertAttribute name="toast"/></div>
     </main>
     <footer class="mt-5 sticky-bottom"><tile:insertAttribute name="footer"/>
         <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

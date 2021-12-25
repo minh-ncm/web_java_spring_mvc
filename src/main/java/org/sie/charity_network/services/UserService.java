@@ -18,4 +18,5 @@ public interface UserService extends UserDetailsService{
     User getUser(String username);
     List<User> getUsersByKeyword(String keyword);
     boolean updateUser(int userId, boolean isReported);
+    User getPostOwner(int postId);
 }

@@ -12,6 +12,7 @@ import org.sie.charity_network.POJOs.Like;
 import org.sie.charity_network.POJOs.Notification;
 import org.sie.charity_network.services.NotificationService;
 import org.sie.charity_network.repositories.NotificationRepository;
+import org.sie.charity_network.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,8 @@ import org.springframework.stereotype.Service;
 public class NotificationServiceImplement implements NotificationService{
     @Autowired
     private NotificationRepository notificationRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     @Override
     public void addNotification(Comment comment) {
@@ -58,8 +61,20 @@ public class NotificationServiceImplement implements NotificationService{
     }
 
     @Override
-    public List<Notification> getNotificationList(int postId) {
-        return notificationRepository.getNotificationList(postId);
+    public List<Notification> getNotificationList(int userId, boolean isGetUnread) {
+        return notificationRepository.getNotificationList(postRepository.getPostListByOwner(userId), isGetUnread);
+    }
+
+    @Override
+    public boolean readAllNotifications(List<Notification> notificationList) {
+        for(Notification notification: notificationList)
+            notification.setIsRead(true);
+        return notificationRepository.readAllNotifications(notificationList);
+    }
+
+    @Override
+    public Long getUnreadNotificationsAmount(int userId) {
+        return notificationRepository.getUnreadNotificationsAmount(postRepository.getPostListByOwner(userId));
     }
     
     

@@ -59,6 +59,11 @@ public class PostServiceImplement implements PostService{
     public Post getPost(int id) {
         return postRepository.getPost(id);
     }
+
+    @Override
+    public List<Post> getPostListByOwner(int ownerId) {
+        return postRepository.getPostListByOwner(ownerId);
+    }
     
     @Override
     public Long getPostAmount() {

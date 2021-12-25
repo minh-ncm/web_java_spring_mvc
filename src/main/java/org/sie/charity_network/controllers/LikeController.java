@@ -4,22 +4,18 @@
  */
 package org.sie.charity_network.controllers;
 
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.sie.charity_network.POJOs.Like;
-import org.sie.charity_network.POJOs.Notification;
 import org.sie.charity_network.POJOs.User;
 import org.sie.charity_network.services.LikeService;
 import org.sie.charity_network.services.NotificationService;
+import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -35,8 +31,7 @@ public class LikeController {
     private NotificationService notificationService;
     
     @PostMapping("like/create/")
-    String create(@ModelAttribute("like") Like like, Model model, HttpSession httpSession) {
-        like.setUser((User) httpSession.getAttribute("currentUser"));
+    String create(@ModelAttribute("like") Like like, Model model) {
         likeService.addLike(like);
         notificationService.addNotification(like);
         return "redirect:"+environment.getProperty("url.dashboard");

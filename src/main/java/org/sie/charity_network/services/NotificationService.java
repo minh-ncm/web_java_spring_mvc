@@ -18,5 +18,7 @@ public interface NotificationService {
     void addNotification(Comment comment);
     void addNotification(Like like);
     void addNotification(Bid bid);
-    List<Notification> getNotificationList(int postId);
+    List<Notification> getNotificationList(int userId, boolean isGetUnread);
+    boolean readAllNotifications(List<Notification> notificationList);
+    Long getUnreadNotificationsAmount(int userId);
 }

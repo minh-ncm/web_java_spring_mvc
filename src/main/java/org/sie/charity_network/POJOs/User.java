@@ -17,8 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -61,6 +59,8 @@ public class User implements Serializable{
     private List<Comment> commentList;
     @OneToMany(mappedBy = "user")
     private List<Bid> bidList;
+    @Transient
+    private Long unreadNotiAmount;
 
     public User() {
     }
@@ -273,6 +273,20 @@ public class User implements Serializable{
      */
     public void setUserRole(String userRole) {
         this.userRole = userRole;
+    }
+
+    /**
+     * @return the unreadNotiAmount
+     */
+    public Long getUnreadNotiAmount() {
+        return unreadNotiAmount;
+    }
+
+    /**
+     * @param unreadNotiAmount the unreadNotiAmount to set
+     */
+    public void setUnreadNotiAmount(Long unreadNotiAmount) {
+        this.unreadNotiAmount = unreadNotiAmount;
     }
     
     

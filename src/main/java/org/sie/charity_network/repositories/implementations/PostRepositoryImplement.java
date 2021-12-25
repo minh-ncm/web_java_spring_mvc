@@ -57,6 +57,17 @@ public class PostRepositoryImplement implements PostRepository{
         query.setFirstResult((page-1)*maxResult);
         return query.getResultList();
     }
+
+    @Override
+    public List<Post> getPostListByOwner(int ownerId) {
+        Session session = localSessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Post> criteriaQuery = builder.createQuery(Post.class);
+        Root<Post> postRoot = criteriaQuery.from(Post.class);
+        criteriaQuery.where(builder.equal(postRoot.get("owner"), ownerId));
+        Query query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
     
      @Override
     public Post getPost(int id) {

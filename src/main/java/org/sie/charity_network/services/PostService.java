@@ -18,6 +18,7 @@ public interface PostService {
     void addPost(Post post);
     List<Post> getPost(int page, int maxResult);
     Post getPost(int id);
+    List<Post> getPostListByOwner(int ownerId);
     Long getPostAmount();
     List<Object[]> getPostStatistic(Date afterDate, Date beforeDate, String keyword);
     boolean updatePost(int postId, Post updatedPost);

@@ -12,9 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.sie.charity_network.POJOs.User;
+import org.sie.charity_network.repositories.PostRepository;
 import org.sie.charity_network.repositories.UserRepository;
 import org.sie.charity_network.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImplement implements UserService{
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PostRepository postRepository;
     @Autowired
     private Cloudinary cloudinary;
     @Autowired
@@ -89,6 +90,11 @@ public class UserServiceImplement implements UserService{
         User user = userRepository.getUser(userId);
         user.setIsReport(isReported);
         return userRepository.updateUser(user);
+    }
+
+    @Override
+    public User getPostOwner(int postId) {
+        return postRepository.getPost(postId).getOwner();
     }
 
     

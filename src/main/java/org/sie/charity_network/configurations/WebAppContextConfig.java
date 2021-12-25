@@ -31,10 +31,12 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
  */
 @Configuration
 @ComponentScan(basePackages = {
+    "org.sie.charity_network",
     "org.sie.charity_network.controllers",
     "org.sie.charity_network.repositories",
     "org.sie.charity_network.services",
     "org.sie.charity_network.validators",
+    "org.sie.charity_network.handlers",
 })
 @EnableWebMvc
 @EnableTransactionManagement

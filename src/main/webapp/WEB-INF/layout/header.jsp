@@ -45,7 +45,12 @@
                 <a class="nav-link" href="#">${pageContext.request.userPrincipal.name}'s account</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Notifications</a>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Notifications
+                    <core:if test="${sessionScope.currentUser.unreadNotiAmount != 0}">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">${sessionScope.currentUser.unreadNotiAmount}</span>
+                    </core:if>
+                </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="#">Action</a></li>
                   <li><a class="dropdown-item" href="#">Another action</a></li>

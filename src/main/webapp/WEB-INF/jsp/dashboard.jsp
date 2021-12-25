@@ -9,7 +9,6 @@
 <%@taglib prefix="tile" uri="http://tiles.apache.org/tags-tiles" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<script src="<core:url value="/js/dashboard.js"/>" type="text/javascript"></script>
 
 <div class="container">
     <h1>Index content</h1>  

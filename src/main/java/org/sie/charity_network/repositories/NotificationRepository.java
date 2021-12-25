@@ -6,6 +6,7 @@ package org.sie.charity_network.repositories;
 
 import java.util.List;
 import org.sie.charity_network.POJOs.Notification;
+import org.sie.charity_network.POJOs.Post;
 
 /**
  *
@@ -13,5 +14,7 @@ import org.sie.charity_network.POJOs.Notification;
  */
 public interface NotificationRepository {
     void addNotification(Notification notification);
-    List<Notification> getNotificationList(int userId);
+    List<Notification> getNotificationList(List<Post> postList, boolean isGetUnread);
+    boolean readAllNotifications(List<Notification> notificationList);
+    Long getUnreadNotificationsAmount(List<Post> postList);
 }
